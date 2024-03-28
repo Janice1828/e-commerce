@@ -30,5 +30,22 @@ include("./components/header.php");
     </div>
 </div>
 <?php
+
+
 include("./components/footer.php");
+
+?>
+
+<?php
+include("connection.php");
+if (isset($_POST['addproduct'])) {
+    $name = $_POST['productName'];
+    $productPrice = $_POST['price'];
+    $productDiscountedPrice = $_POST['discountedPrice'];
+    $productDescription = $_POST['description'];
+    $category = $_POST['category'];
+    $subCategory = $_POST['subcategory'];
+    $insertQuery = "INSERT INTO `tbl_products`(productName, price, discountedPrice, description,category,subCategory) VALUES ('$name','$productPrice','$productDiscountedPrice','$productDescription','$category','$subCategory')";
+    $result = mysqli_query($conn, $insertQuery);
+}
 ?>

@@ -1,4 +1,4 @@
-<form class="row" id="addProductForm">
+<form class="row" id="addProductForm" method="post">
     <div class="col-6">
         <label class="form-control-label" for="">Product Name</label>
         <input type="text" class="form-control-input" name="productName" value="">
@@ -18,20 +18,20 @@
     </div>
     <div class="col-6">
         <label class="form-control-label" for="">Category</label>
-        <select class="form-control-select">
-            <option value="">Select Option</option>
-            <option value="">Mens Collection</option>
-            <option value="">Womens Collection</option>
-            <option value="">Jewellery</option>
+        <select class="form-control-select" name="category">
+            <option value="0">Select Option</option>
+            <option value="Mens Collection">Mens Collection</option>
+            <option value="Womens Collection">Womens Collection</option>
+            <option value="Jewellery">Jewellery</option>
         </select>
     </div>
     <div class="col-6">
         <label class="form-control-label" for="">Sub Category</label>
-        <select class="form-control-select">
-            <option value="">Select Option</option>
-            <option value="">Shoes</option>
-            <option value="">Watch</option>
-            <option value="">Glasses</option>
+        <select class="form-control-select" name="subcategory">
+            <option value="0">Select Option</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Watch">Watch</option>
+            <option value="Glasses">Glasses</option>
         </select>
     </div>
     <div class="col-12">
