@@ -29,8 +29,8 @@
                 <div class="p-5">
                     <div class="dashboard-card">
                         <div class="dashboard-card-body">
-                            <h2 class="mb-3">View Product</h2>
-                            <?php include("./components/viewproducttable.php") ?>
+                            <h2 class="mb-3">Add Product</h2>
+                            <?php include("./components/addproductform.php") ?>
                         </div>
                     </div>
                 </div>
