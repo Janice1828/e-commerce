@@ -5,13 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ecommerce</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
 </head>
 
 <body>
   <div class="nav_bar">
     <div class="nav_bar_child_container">
-      <a href="home.php"><img src="./images/logo.jpg" alt="Logo" id="logo" title="Logo" />
+      <a href="home.php"><img src="../images/logo.jpg" alt="Logo" id="logo" title="Logo" />
       </a>
       <div class="d_flex navbar_contents">
         <a href="productDetail.php" class="cart" title="Cart"><i class="fa-solid fa-cart-shopping">

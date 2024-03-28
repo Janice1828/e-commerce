@@ -18,7 +18,7 @@ function login_submit() {
   if (inp_email == get_email && inp_password == get_password) {
     sessionStorage.setItem("loggedIn", "true");
     event.preventDefault();
-    window.location.href = "Home.php";
+    window.location.href = "./userpanel/home.php";
   } else {
     document.getElementById("loginErr").style.display = "block";
   }
