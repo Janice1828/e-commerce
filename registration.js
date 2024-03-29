@@ -32,7 +32,7 @@ function Register() {
         event.preventDefault();
         localStorage.removeItem("added_product_id");
 
-        window.location.href = "login.php";
+        window.location.href = "login.html";
       } else {
         passwordError.style.display = "block";
       }

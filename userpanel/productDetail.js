@@ -34,19 +34,27 @@ function selectById(idName) {
 try {
   async function getSingleDetail() {
     let product_id = sessionStorage.getItem("product_id");
-    let fetchData = await fetch(
-      `https://fakestoreapi.com/products/${product_id}`
-    );
-    let response = await fetchData.json();
+    let fetchData = await fetch(`../products.json`);
+    let result = await fetchData.json();
+    // console.log(response);
+    function filterById(jsonObject, id) {
+      return jsonObject.filter(function (jsonObject) {
+        return jsonObject["id"] == id;
+      })[0];
+    }
+    let response = filterById(result["data"], product_id);
+    console.log(response);
     title.innerHTML = response.title;
     description.innerHTML = response.description;
     price.innerHTML = `$ ${response.price}`;
-    rate.innerHTML = getStarss(response.rating.rate);
+    // rate.innerHTML = getStarss(response.rating.rate);
+    console.log(response.image);
     image.src = response.image;
-    let singleProductID = response.id;
+
+    // let singleProductID = response.id;
     var options = {
-      width: 250,
-      height: 250,
+      width: 500,
+      height: 300,
       zoomWidth: 200,
       offset: { vertical: 0, horizontal: 10 },
       scale: 1,
@@ -107,7 +115,7 @@ if (loggedIn != "true") {
 }
 function logout() {
   sessionStorage.removeItem("loggedIn");
-  window.location.href = "http://127.0.0.1:5500/login.php";
+  window.location.href = "http://127.0.0.1:5500/login.html";
 }
 if (loggedIn == "true") {
   document.querySelector(".nav_login_register").style.display = "none";

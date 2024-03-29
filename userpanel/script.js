@@ -1,6 +1,6 @@
 function logout() {
   sessionStorage.removeItem("loggedIn");
-  window.location.href = "login.php";
+  window.location.href = "login.html";
 }
 let loggedIn = sessionStorage.getItem("loggedIn");
 if (loggedIn == "true") {
@@ -13,11 +13,11 @@ if (loggedIn != "true") {
 let category = document.querySelector("#change_category");
 let cards_container = document.getElementById("api_fetchedproducts_row");
 async function fetchData() {
-  let fetchData = await fetch("https://fakestoreapi.com/products");
-  let data = await fetchData.json();
+  let fetchData = await fetch("../products.json");
+  let res = await fetchData.json();
+  // console.log(res.data);
+  let data = res.data;
   try {
-    // make localstorage for all products
-
     function displayAll() {
       data.forEach((item) => {
         createProduct(item);
@@ -66,7 +66,7 @@ function createProduct(item) {
     sessionStorage.setItem("product_id", item.id);
   });
   link.className = "link_card";
-  link.href = "productDetail.php";
+  link.href = "productDetail.html";
   let card = createElement("div");
   card.className = "card";
   let card_body = createElement("div");
@@ -81,15 +81,18 @@ function createProduct(item) {
   card.title = item.title;
   let price = createElement("p");
   price.id = "price";
+  let discountedPrice = createElement("strike");
+  discountedPrice.id = "discountedPrice";
   link.appendChild(card);
   child.appendChild(link);
   card.appendChild(card_body);
   card_body.appendChild(img);
   card_body.appendChild(card_content);
   card_content.appendChild(title);
-  card_content.appendChild(price);
+  card_content.append(price, discountedPrice);
   title.textContent = item.title;
-  price.textContent = "$ " + item.price;
+  price.textContent = "Nrs. " + item.discountedPrice;
+  discountedPrice.textContent = "Nrs." + item.price;
   cards_container.appendChild(child);
 }
 

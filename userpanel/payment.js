@@ -14,12 +14,12 @@ payBtn.addEventListener("click", () => {
   if (makePayment == true) {
     alert("Payment Successfull");
     localStorage.removeItem("added_product_id");
-    window.location.href = "home.php";
+    window.location.href = "home.html";
   }
 });
 function logout() {
   sessionStorage.removeItem("loggedIn");
-  window.location.href = "http://127.0.0.1:5500/login.php";
+  window.location.href = "../login.html";
 }
 let loggedIn = sessionStorage.getItem("loggedIn");
 if (loggedIn == "true") {
@@ -84,10 +84,11 @@ if (productIds) {
   orderedNumber.innerHTML = 0;
 }
 let productsListContainer = document.getElementById("productList");
-fetch("https://fakestoreapi.com/products")
+fetch("../products.json")
   .then((res) => res.json())
   .then((data) => {
-    let filteredProducts = data.filter(filterProduct);
+    let result = data.data;
+    let filteredProducts = result.filter(filterProduct);
   })
   .catch((err) => console.log(err.message));
 let totalCosts = 0;

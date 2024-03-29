@@ -161,11 +161,12 @@
   padding-left: 4px;
   margin-top: 4px;
 }
-#original_price {
-  font-size: 14px;
-  padding-left: 4px;
-  text-decoration: line-through;
+#discountedPrice {
+  font-size: 13px;
+  padding-left: 7px;
+  margin-top: 4px;
 }
+
 #product_title {
   white-space: nowrap;
   overflow: hidden;
@@ -393,9 +394,10 @@
   color: red;
 }
 #cart-product-img {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
+  /* border-radius: 50%; */
 }
 .delete-order-button {
   padding: 10px 25px;

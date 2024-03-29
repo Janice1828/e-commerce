@@ -1,0 +1,169 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "Earpod",
+      "price": "2000",
+      "discountedPrice": "1800",
+      "image": "../images/products/earpod.jpg",
+      "description": "Introducing the all-new AirPods. Featuring spatial audio that places sound all around you, Adaptive EQ that tunes music to your ears, and longer battery life. It’s all sweat and water resistant and delivers an experience that’s simply magical.",
+      "category": "Accessories",
+      "subCategory": "Earphone",
+      "brand": "Samsung"
+    },
+    {
+      "id": 2,
+      "title": "Headphone",
+      "price": "4000",
+      "discountedPrice": "3800",
+      "image": "../images/products/headphone.jpg",
+      "description": "The JBL JR460 is a model of kids’ headphones offered by JBL. These headphones are designed specifically for children, providing a safe and enjoyable audio experience",
+      "category": "Accessories",
+      "subCategory": "Earphone",
+      "brand": "JBL"
+    },
+    {
+      "id": 3,
+      "title": "Digital Watch",
+      "price": "3000",
+      "discountedPrice": "2899",
+      "image": "../images/products/digital-watch.jpg",
+      "description": "Waterproof Sports Multifunctional Alarm Unisex Watch Digital Watch - For Men & Women New Waterproof Black Digital Jee Shock Unisex Watch For Kids - Boys And Girls",
+      "category": "Accessories",
+      "subCategory": "Watch",
+      "brand": "Samsung"
+    },
+    {
+      "id": 4,
+      "title": "Sport Shoes",
+      "price": "2000",
+      "discountedPrice": "1800",
+      "image": "../images/products/nike-sport-shoes.jpg",
+      "description": "FAST Trendy Trainer Execellent Gear Lace-Ups Sporty Running Shoes For Men ",
+      "category": "Fashion",
+      "subCategory": "Shoes",
+      "brand": "Nike"
+    },
+    {
+      "id": 5,
+      "title": "N5 Chanel",
+      "price": "6000",
+      "discountedPrice": "5500",
+      "image": "../images/products/chanel-perfume.jpg",
+      "description": "Classified as a refined, gentle and floral fragrance With feminine scent possesses a blend of modern floral, and balanced notes It is recommended for eveningwear",
+      "category": "Cosmetics",
+      "subCategory": "Perfume",
+      "brand": "Chanel"
+    },
+    {
+      "id": 6,
+      "title": "Rayban Sunglass",
+      "price": "1999",
+      "discountedPrice": "1499",
+      "image": "../images/products/raybon-sunglass.jpg",
+      "description": "Polarized, UV Protection Wayfarer Sunglasses (51)  (For Men & Women)",
+      "category": "Fashion",
+      "subCategory": "sunglasses",
+      "brand": "Rayban"
+    },
+    {
+      "id": 7,
+      "title": "Goldstar Sports Shoes",
+      "price": "1599",
+      "discountedPrice": "1299",
+      "image": "../images/products/goldstar-shoes.jpg",
+      "description": "badgeGOLDSTAR G401 Black Trekking Lace - Up Boots With Rubber Sole Shoes For Men | Fashion Trekking Shoes For Men",
+      "category": "Fashion",
+      "subCategory": "Shoes",
+      "brand": "Goldstar"
+    },
+    {
+      "id": 8,
+      "title": "Formal Party Shoes",
+      "price": "4999",
+      "discountedPrice": "4599",
+      "image": "../images/products/caliber-formal-shoes.jpg",
+      "description": "badgeCaliber Shoes Coffee/R Penny Formal Shoes For Men ( A 527 C )",
+      "category": "Fashion",
+      "subCategory": "Shoes",
+      "brand": "Caliber"
+    },
+    {
+      "id": 9,
+      "title": "Coco Chanel Perfume",
+      "price": "3999",
+      "discountedPrice": "3699",
+      "image": "../images/products/coco-chanel-perfume.jpg",
+      "description": "An absolutely modern composition with a strong yet surprisingly fresh character.",
+      "category": "Cosmetics",
+      "subCategory": "Perfume",
+      "brand": "Chanel"
+    },
+    {
+      "id": 10,
+      "title": "Newmew Sun Glasses",
+      "price": "1599",
+      "discountedPrice": "1299",
+      "image": "../images/products/newmew-sunglass.jpg",
+      "description": "Black Solid Retro Design Rectangular Sunglasses For Women | Casual Sunglasses For Women | Women's Fashion",
+      "category": "Fashion",
+      "subCategory": "sunglasses",
+      "brand": "NewMew"
+    },
+    {
+      "id": 11,
+      "title": "Lipstick",
+      "price": "499",
+      "discountedPrice": "399",
+      "image": "../images/products/misumi-lipstick.jpg",
+      "description": "Colors Lipstick Set Matte Velvety Lip Glosses Waterproof Long Lasting Beauty Makeup Lipsticks    ",
+      "category": "Cosmetics",
+      "subCategory": "Lipstick",
+      "brand": "Misumi"
+    },
+    {
+      "id": 12,
+      "title": "Boss Perfume",
+      "price": "2999",
+      "discountedPrice": "2599",
+      "image": "../images/products/boss-perfume.jpg",
+      "description": "Al-Nuaim Silver Series |Chocolate Musk |Alcohol Free |Attar Roll On |Luxury Scent with Long Lasting Fragrance For Men & Women |6ml",
+      "category": "Cosmetics",
+      "subCategory": "Perfume",
+      "brand": "Boss"
+    },
+    {
+      "id": 13,
+      "title": "Blue and red mix Heel",
+      "price": "3599",
+      "discountedPrice": "3099",
+      "image": "../images/products/caliber-ladies-heel.jpg",
+      "description": "PU Leather Formal Heel Shoes For Women",
+      "category": "Fashion",
+      "subCategory": "Shoes",
+      "brand": "Caliber"
+    },
+    {
+      "id": 14,
+      "title": "Hummel Fulsal Shoes",
+      "price": "2500",
+      "discountedPrice": "2300",
+      "image": "../images/products/hummel-futsal-shoes.jpg",
+      "description": "Hummel Futsal Boot For Men | Synthetic Leather Futsal Boot For Men | Patterned Futsal Boot For Men",
+      "category": "Sports",
+      "subCategory": "Shoes",
+      "brand": "Caliber"
+    },
+    {
+      "id": 15,
+      "title": "Iwc Watch",
+      "price": "1999",
+      "discountedPrice": "1599",
+      "image": "../images/products/iwc-watch.jpg",
+      "description": "NAVIFORCE NF9126 Genuine Leather Quartz Movement Date Function Analog Wrist Watch For Men â€“ NF9126 | Casual Watch For Men",
+      "category": "Fashion",
+      "subCategory": "Watch",
+      "brand": "Navi Force"
+    }
+  ]
+}

@@ -3,10 +3,12 @@ function createElement(elementName) {
 }
 let sn = 1;
 let tableBody = document.querySelector("tbody");
-fetch("https://fakestoreapi.com/products")
+fetch("../products.json")
   .then((res) => res.json())
-  .then((data) => {
-    let res = data.filter(filterData);
+  .then((result) => {
+    const response = result.data;
+    let res = response.filter(filterData);
+    // console.log(response);
   });
 let id = localStorage.getItem("added_product_id");
 function filterData(num) {
@@ -58,7 +60,7 @@ function filterData(num) {
 let loggedIn = sessionStorage.getItem("loggedIn");
 function logout() {
   sessionStorage.removeItem("loggedIn");
-  window.location.href = "http://127.0.0.1:5500/login.php";
+  window.location.href = "http://127.0.0.1:5500/login.html";
 }
 if (loggedIn == "true") {
   document.querySelector(".nav_login_register").style.display = "none";
@@ -83,5 +85,5 @@ if (totalAddToCart) {
 }
 function logout() {
   sessionStorage.removeItem("loggedIn");
-  window.location.href = "http://127.0.0.1:5500/login.php";
+  window.location.href = "http://127.0.0.1:5500/login.html";
 }
