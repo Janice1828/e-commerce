@@ -60,7 +60,7 @@ if (productIds) {
         let qtyContainer = createElement("div");
         qtyContainer.className = "payment-qty-container";
         let price = createElement("p");
-        price.innerHTML = `<b>Price :</b> $ ${data.price}`;
+        price.innerHTML = `<b>Price :</b> $ ${data.discountedPrice}`;
         image.id = "paymentId";
         image.src = data.image;
         title.innerHTML = data.title;
@@ -71,10 +71,10 @@ if (productIds) {
         card.appendChild(cardBody);
         col.appendChild(card);
         productsListContainer.appendChild(col);
-        totalCosts += data.price;
+        totalCosts += data.discountedPrice;
       }
       const deliverCharge = 100;
-      const totalAmount = deliverCharge + totalCosts;
+      const totalAmount = deliverCharge + Number(totalCosts);
       itemsPrice.innerHTML = Math.round(totalCosts);
       deliveryFee.innerHTML = deliverCharge;
       totalPayment.innerHTML = Math.round(totalAmount);

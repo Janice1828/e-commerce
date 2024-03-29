@@ -7,9 +7,7 @@ let addToCart = selectById("add-to-cart-button");
 let addtoCart = selectById("add-tocart-number");
 var num = 1;
 let loggedIn = sessionStorage.getItem("loggedIn");
-// console.log(loggedIn);
 let orderedNumber = document.querySelector(".cart-order-number");
-
 let totalAddToCart = localStorage.getItem("added_product_id");
 if (totalAddToCart) {
   let cartNumberConverting = totalAddToCart.split(",");
@@ -21,10 +19,6 @@ if (totalAddToCart) {
 } else {
   orderedNumber.innerHTML = 0;
 }
-// let single_id = localStorage.getItem("product_id");
-// let array_id = single_id.split(",");
-// let numberedArr = array_id.map(convertedNumber);
-// console.log(numberedArr);
 function convertedNumber(num) {
   return Number(num);
 }
@@ -36,22 +30,17 @@ try {
     let product_id = sessionStorage.getItem("product_id");
     let fetchData = await fetch(`../products.json`);
     let result = await fetchData.json();
-    // console.log(response);
     function filterById(jsonObject, id) {
       return jsonObject.filter(function (jsonObject) {
         return jsonObject["id"] == id;
       })[0];
     }
     let response = filterById(result["data"], product_id);
-    console.log(response);
     title.innerHTML = response.title;
     description.innerHTML = response.description;
     price.innerHTML = `$ ${response.price}`;
-    // rate.innerHTML = getStarss(response.rating.rate);
-    console.log(response.image);
+    rate.innerHTML = getStarss(response.rating);
     image.src = response.image;
-
-    // let singleProductID = response.id;
     var options = {
       width: 500,
       height: 300,

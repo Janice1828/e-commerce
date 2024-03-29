@@ -1,3 +1,11 @@
+let orderedNumber = document.querySelector(".cart-order-number");
+let totalAddToCart = localStorage.getItem("added_product_id");
+const searchProducts = document.getElementById("search_products");
+let category = document.querySelector("#change_category");
+
+function selectById(idName) {
+  return document.getElementById(idName);
+}
 function logout() {
   sessionStorage.removeItem("loggedIn");
   window.location.href = "login.html";
@@ -10,13 +18,37 @@ if (loggedIn != "true") {
   document.querySelector(".cart").style.display = "none";
   document.querySelector("#logout").style.display = "none";
 }
-let category = document.querySelector("#change_category");
 let cards_container = document.getElementById("api_fetchedproducts_row");
 async function fetchData() {
   let fetchData = await fetch("../products.json");
   let res = await fetchData.json();
-  // console.log(res.data);
   let data = res.data;
+  function getCategory(obj) {
+    return obj.category;
+  }
+  let categoryArr = data.map(getCategory);
+  function removeDuplicateCategory(arr) {
+    return [...new Set(arr)];
+  }
+  let result = removeDuplicateCategory(categoryArr);
+  result.forEach((item) => {
+    let opt = createElement("option");
+    opt.value = item;
+    opt.textContent = item;
+    category.append(opt);
+  });
+  category.addEventListener("change", function () {
+    for (let i = 0; i < data.length; i++) {
+      if (this.value == result[i] && data[i].category == this.value) {
+        // createProduct(data[i]);
+        console.log(data[i]);
+      }
+      // console.log(data[i]);
+      // console.log(data[i].category);
+      // console.log(this.value);
+    }
+  });
+  // console.log(result);
   try {
     function displayAll() {
       data.forEach((item) => {
@@ -24,31 +56,31 @@ async function fetchData() {
       });
     }
     displayAll();
-    category.addEventListener("change", function () {
-      cards_container.innerHTML = "";
-      data.forEach((item) => {
-        if (
-          this.value == "men's clothing" &&
-          item.category == "men's clothing"
-        ) {
-          createProduct(item);
-        } else if (this.value == "jewelery" && item.category == "jewelery") {
-          createProduct(item);
-        } else if (
-          this.value == "electronics" &&
-          item.category == "electronics"
-        ) {
-          createProduct(item);
-        } else if (
-          this.value == "women's clothing" &&
-          item.category == "women's clothing"
-        ) {
-          createProduct(item);
-        } else if (this.value == "all") {
-          createProduct(item);
-        }
-      });
-    });
+    // category.addEventListener("change", function () {
+    //   cards_container.innerHTML = "";
+    //   data.forEach((item) => {
+    //     if (
+    //       this.value == "men's clothing" &&
+    //       item.category == "men's clothing"
+    //     ) {
+    //       createProduct(item);
+    //     } else if (this.value == "jewelery" && item.category == "jewelery") {
+    //       createProduct(item);
+    //     } else if (
+    //       this.value == "electronics" &&
+    //       item.category == "electronics"
+    //     ) {
+    //       createProduct(item);
+    //     } else if (
+    //       this.value == "women's clothing" &&
+    //       item.category == "women's clothing"
+    //     ) {
+    //       createProduct(item);
+    //     } else if (this.value == "all") {
+    //       createProduct(item);
+    //     }
+    //   });
+    // });
   } catch (err) {
     console.error(err.message);
   }
@@ -57,7 +89,6 @@ fetchData();
 function createElement(elementName) {
   return document.createElement(elementName);
 }
-
 function createProduct(item) {
   let child = createElement("div");
   child.className = "col-3";
@@ -85,23 +116,17 @@ function createProduct(item) {
   discountedPrice.id = "discountedPrice";
   link.appendChild(card);
   child.appendChild(link);
+
   card.appendChild(card_body);
   card_body.appendChild(img);
   card_body.appendChild(card_content);
   card_content.appendChild(title);
   card_content.append(price, discountedPrice);
   title.textContent = item.title;
-  price.textContent = "Nrs. " + item.discountedPrice;
   discountedPrice.textContent = "Nrs." + item.price;
+  price.textContent = "Nrs. " + item.discountedPrice;
   cards_container.appendChild(child);
 }
-
-function selectById(idName) {
-  return document.getElementById(idName);
-}
-let orderedNumber = document.querySelector(".cart-order-number");
-
-let totalAddToCart = localStorage.getItem("added_product_id");
 if (totalAddToCart) {
   let cartNumberConverting = totalAddToCart.split(",");
   function convertingToNumber(n) {
@@ -117,23 +142,20 @@ if (!loggedIn == null) {
     document.querySelector(".order-adding-section").style.display = "none";
   }
 }
-// for searching the content
-const searchProducts = document.getElementById("search_products");
 searchProducts.addEventListener("input", findProduct);
 function findProduct(e) {
-  fetch("https://fakestoreapi.com/products")
+  fetch("../products.json")
     .then((res) => res.json())
     .then((data) => {
-      let filteredData = data.filter(filterValue);
+      let result = data.data;
+      let filteredData = result.filter(filterValue);
       cards_container.innerHTML = "";
       filteredData.forEach((item) => {
         createProduct(item);
       });
       function filterValue(value) {
         let inpValue = e.target.value.toUpperCase();
-        // console.log(inpValue);
         let title = value.title.toUpperCase();
-        // console.log(title);
         if (title.includes(inpValue)) {
           return value;
         }

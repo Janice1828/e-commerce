@@ -9,7 +9,8 @@
       "description": "Introducing the all-new AirPods. Featuring spatial audio that places sound all around you, Adaptive EQ that tunes music to your ears, and longer battery life. It’s all sweat and water resistant and delivers an experience that’s simply magical.",
       "category": "Accessories",
       "subCategory": "Earphone",
-      "brand": "Samsung"
+      "brand": "Samsung",
+      "rating": 4
     },
     {
       "id": 2,
@@ -20,7 +21,8 @@
       "description": "The JBL JR460 is a model of kids’ headphones offered by JBL. These headphones are designed specifically for children, providing a safe and enjoyable audio experience",
       "category": "Accessories",
       "subCategory": "Earphone",
-      "brand": "JBL"
+      "brand": "JBL",
+      "rating": 3
     },
     {
       "id": 3,
@@ -31,7 +33,8 @@
       "description": "Waterproof Sports Multifunctional Alarm Unisex Watch Digital Watch - For Men & Women New Waterproof Black Digital Jee Shock Unisex Watch For Kids - Boys And Girls",
       "category": "Accessories",
       "subCategory": "Watch",
-      "brand": "Samsung"
+      "brand": "Samsung",
+      "rating": 2
     },
     {
       "id": 4,
@@ -42,7 +45,8 @@
       "description": "FAST Trendy Trainer Execellent Gear Lace-Ups Sporty Running Shoes For Men ",
       "category": "Fashion",
       "subCategory": "Shoes",
-      "brand": "Nike"
+      "brand": "Nike",
+      "rating": 4
     },
     {
       "id": 5,
@@ -53,7 +57,8 @@
       "description": "Classified as a refined, gentle and floral fragrance With feminine scent possesses a blend of modern floral, and balanced notes It is recommended for eveningwear",
       "category": "Cosmetics",
       "subCategory": "Perfume",
-      "brand": "Chanel"
+      "brand": "Chanel",
+      "rating": 4
     },
     {
       "id": 6,
@@ -64,7 +69,8 @@
       "description": "Polarized, UV Protection Wayfarer Sunglasses (51)  (For Men & Women)",
       "category": "Fashion",
       "subCategory": "sunglasses",
-      "brand": "Rayban"
+      "brand": "Rayban",
+      "rating": 3.5
     },
     {
       "id": 7,
@@ -75,7 +81,8 @@
       "description": "badgeGOLDSTAR G401 Black Trekking Lace - Up Boots With Rubber Sole Shoes For Men | Fashion Trekking Shoes For Men",
       "category": "Fashion",
       "subCategory": "Shoes",
-      "brand": "Goldstar"
+      "brand": "Goldstar",
+      "rating": 2.5
     },
     {
       "id": 8,
@@ -86,7 +93,8 @@
       "description": "badgeCaliber Shoes Coffee/R Penny Formal Shoes For Men ( A 527 C )",
       "category": "Fashion",
       "subCategory": "Shoes",
-      "brand": "Caliber"
+      "brand": "Caliber",
+      "rating": 3
     },
     {
       "id": 9,
@@ -97,18 +105,20 @@
       "description": "An absolutely modern composition with a strong yet surprisingly fresh character.",
       "category": "Cosmetics",
       "subCategory": "Perfume",
-      "brand": "Chanel"
+      "brand": "Chanel",
+      "rating": 2
     },
     {
       "id": 10,
-      "title": "Newmew Sun Glasses",
+      "title": "Newmew Sun Glass",
       "price": "1599",
       "discountedPrice": "1299",
       "image": "../images/products/newmew-sunglass.jpg",
       "description": "Black Solid Retro Design Rectangular Sunglasses For Women | Casual Sunglasses For Women | Women's Fashion",
       "category": "Fashion",
       "subCategory": "sunglasses",
-      "brand": "NewMew"
+      "brand": "NewMew",
+      "rating": 1.5
     },
     {
       "id": 11,
@@ -119,7 +129,8 @@
       "description": "Colors Lipstick Set Matte Velvety Lip Glosses Waterproof Long Lasting Beauty Makeup Lipsticks    ",
       "category": "Cosmetics",
       "subCategory": "Lipstick",
-      "brand": "Misumi"
+      "brand": "Misumi",
+      "rating": 5
     },
     {
       "id": 12,
@@ -130,7 +141,8 @@
       "description": "Al-Nuaim Silver Series |Chocolate Musk |Alcohol Free |Attar Roll On |Luxury Scent with Long Lasting Fragrance For Men & Women |6ml",
       "category": "Cosmetics",
       "subCategory": "Perfume",
-      "brand": "Boss"
+      "brand": "Boss",
+      "rating": 3
     },
     {
       "id": 13,
@@ -141,7 +153,8 @@
       "description": "PU Leather Formal Heel Shoes For Women",
       "category": "Fashion",
       "subCategory": "Shoes",
-      "brand": "Caliber"
+      "brand": "Caliber",
+      "rating": 5
     },
     {
       "id": 14,
@@ -152,7 +165,8 @@
       "description": "Hummel Futsal Boot For Men | Synthetic Leather Futsal Boot For Men | Patterned Futsal Boot For Men",
       "category": "Sports",
       "subCategory": "Shoes",
-      "brand": "Caliber"
+      "brand": "Caliber",
+      "rating": 2
     },
     {
       "id": 15,
@@ -163,7 +177,8 @@
       "description": "NAVIFORCE NF9126 Genuine Leather Quartz Movement Date Function Analog Wrist Watch For Men â€“ NF9126 | Casual Watch For Men",
       "category": "Fashion",
       "subCategory": "Watch",
-      "brand": "Navi Force"
+      "brand": "Navi Force",
+      "rating": 4
     }
   ]
 }

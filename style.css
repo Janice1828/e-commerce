@@ -83,6 +83,7 @@
 #logo {
   height: 50px;
   width: 50px;
+  /* object-fit: contain; */
   border-radius: 50%;
 }
 .cart {
@@ -140,6 +141,7 @@
   background-position: center;
   background-size: contain;
   background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 .row {
   gap: 20px;
@@ -463,7 +465,8 @@
 #paymentId {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  object-fit: contain;
+  /* border-radius: 50%; */
 }
 .payment-flex {
   align-items: center;

@@ -32,7 +32,7 @@ function filterData(num) {
       td5.appendChild(btn);
       td1.innerHTML = sn++;
       td3.innerHTML = num.title;
-      td4.innerHTML = num.price;
+      td4.innerHTML = num.discountedPrice;
       tr.append(td1, td2, td3, td4, td5);
       tableBody.appendChild(tr);
       btn.addEventListener("click", function () {
@@ -42,7 +42,6 @@ function filterData(num) {
         for (let i = 0; i < arr.length; i++) {
           if (buttonId == arr[i]) {
             let ind = arr.indexOf(arr[i]);
-            // console.log(ind);
             arr.splice(ind, 1);
             localStorage.setItem("added_product_id", arr);
             i = 25;
