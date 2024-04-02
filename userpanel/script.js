@@ -33,22 +33,10 @@ async function fetchData() {
   let result = removeDuplicateCategory(categoryArr);
   result.forEach((item) => {
     let opt = createElement("option");
-    opt.value = item;
     opt.textContent = item;
+    opt.value = item;
     category.append(opt);
   });
-  category.addEventListener("change", function () {
-    for (let i = 0; i < data.length; i++) {
-      if (this.value == result[i] && data[i].category == this.value) {
-        // createProduct(data[i]);
-        console.log(data[i]);
-      }
-      // console.log(data[i]);
-      // console.log(data[i].category);
-      // console.log(this.value);
-    }
-  });
-  // console.log(result);
   try {
     function displayAll() {
       data.forEach((item) => {
@@ -56,31 +44,46 @@ async function fetchData() {
       });
     }
     displayAll();
-    // category.addEventListener("change", function () {
-    //   cards_container.innerHTML = "";
-    //   data.forEach((item) => {
-    //     if (
-    //       this.value == "men's clothing" &&
-    //       item.category == "men's clothing"
-    //     ) {
-    //       createProduct(item);
-    //     } else if (this.value == "jewelery" && item.category == "jewelery") {
-    //       createProduct(item);
-    //     } else if (
-    //       this.value == "electronics" &&
-    //       item.category == "electronics"
-    //     ) {
-    //       createProduct(item);
-    //     } else if (
-    //       this.value == "women's clothing" &&
-    //       item.category == "women's clothing"
-    //     ) {
-    //       createProduct(item);
-    //     } else if (this.value == "all") {
-    //       createProduct(item);
-    //     }
-    //   });
-    // });
+    let storageCategory = [];
+    let categoryName = "";
+    category.addEventListener("change", function () {
+      storageCategory = [];
+      cards_container.innerHTML = "";
+      data.forEach((item) => {
+        if (this.value == "Accessories" && item.category == "Accessories") {
+          if ((item.category = "Accessories")) {
+            storageCategory.push(item.id);
+            categoryName = "Accessories";
+            localStorage.setItem("categoryTitle", categoryName);
+          }
+          window.location.href = "./subCategory.html";
+        } else if (this.value == "Fashion" && item.category == "Fashion") {
+          if ((item.category = "Fashion")) {
+            storageCategory.push(item.id);
+            categoryName = "Fashion";
+            localStorage.setItem("categoryTitle", categoryName);
+          }
+          window.location.href = "./subCategory.html";
+        } else if (this.value == "Cosmetics" && item.category == "Cosmetics") {
+          if ((item.category = "Cosmetics")) {
+            storageCategory.push(item.id);
+            categoryName = "Cosmetics";
+            localStorage.setItem("categoryTitle", categoryName);
+          }
+          window.location.href = "./subCategory.html";
+        } else if (this.value == "Sports" && item.category == "Sports") {
+          if ((item.category = "Sports")) {
+            storageCategory.push(item.id);
+            categoryName = "Sports";
+            localStorage.setItem("categoryTitle", categoryName);
+          }
+          window.location.href = "./subCategory.html";
+        } else if (this.value == "all") {
+          createProduct(item);
+        }
+      });
+      localStorage.setItem("productCategories", storageCategory);
+    });
   } catch (err) {
     console.error(err.message);
   }

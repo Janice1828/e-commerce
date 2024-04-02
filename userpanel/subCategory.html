@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecommerce</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <div class="nav_bar">
+      <div class="nav_bar_child_container">
+        <a href="home.html"
+          ><img src="../images/logo.jpg" alt="Logo" id="logo" title="Logo" />
+        </a>
+
+        <div class="d_flex navbar_contents">
+          <a href="addedproducts.html" class="cart" title="Cart"
+            ><i class="fa-solid fa-cart-shopping">
+              <span class="cart-order-number"></span
+            ></i>
+          </a>
+          <div class="nav_login_register d_flex">
+            <a href="../login.html" title="Login">Login</a>
+            <a href="registration.html" title="Register">Register</a>
+          </div>
+          <div>
+            <a
+              href="#"
+              id="logout"
+              title="Logout"
+              type="button"
+              onclick="logout()"
+              ><i class="fa-solid fa-right-from-bracket"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sub-category-container">
+      <div class="row">
+        <div class="col-3 filtering-product-section">Filter Products</div>
+        <div class="col-9">
+          <div class="row sub-category-products-lists">
+            <h2 class="col-12 products_heading" id="categoryTitle"></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script src="subCategory.js"></script>
+<script
+  src="https://kit.fontawesome.com/8508bb06d2.js"
+  crossorigin="anonymous"
+></script>

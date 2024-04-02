@@ -6,21 +6,16 @@
     <title>Document</title>
   </head>
   <body>
-    <img src="" alt="Image" />
+    <select name="" id="">
+      <option value="">
+        <a href="https://www.google.com">Google</a>
+      </option>
+      <option value="">
+        <a href="https://www.google.com">Google</a>
+      </option>
+      <option value="">
+        <a href="https://www.google.com">Google</a>
+      </option>
+    </select>
   </body>
 </html>
-<script>
-  let image = document.querySelector("img");
-  let data = fetch("./products.json")
-    .then((res) => res.json())
-    .then((data) => {
-      // console.log(data[0].image);
-      image.src = data[0].image;
-    })
-    .catch((err) => console.log(err.message));
-
-  // let fs = require("fs");
-  // let data = fs.readFileSync("products.json");
-  // let res = JSON.parse(data);
-  // console.log(res);
-</script>
