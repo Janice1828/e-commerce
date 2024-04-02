@@ -24,38 +24,157 @@ if (loggedIn != "true") {
   document.querySelector(".cart").style.display = "none";
   document.querySelector("#logout").style.display = "none";
 }
+function createProducts(item) {
+  const col = createElement("div");
+  col.className = "col-4";
+  let link = createElement("a");
+  link.id = "subCategoriesLink";
+  link.href = "./productDetail.html";
+  link.addEventListener("click", function () {
+    sessionStorage.setItem("product_id", item.id);
+  });
+  const card = document.createElement("div");
+  const cardBody = document.createElement("div");
+  const cardContent = document.createElement("div");
+  const image = createElement("img");
+  card.className = "card";
+  cardBody.className = "card_body";
+  cardContent.className = "card_content";
+  const title = createElement("p");
+  const price = createElement("p");
+  title.id = "product_title";
+  price.id = "price";
+  image.src = item.image;
+  image.id = "category_product_img";
+  title.innerHTML = item.title;
+  price.innerHTML = `Nrs. ${item.price}`;
+  cardContent.append(title, price);
+  cardBody.append(image, cardContent);
+  card.appendChild(cardBody);
+  link.appendChild(card);
+  col.appendChild(link);
+  productsContainer.appendChild(col);
+}
+const brand = document.getElementById("brands");
+const colors = document.getElementById("colors");
+const sizes = document.getElementById("sizes");
+function createBrandFilter(obj) {
+  for (let i = 0; i < obj.length; i++) {
+    let container = createElement("div");
+    container.className = "filter-brand-container";
+    let inp = createElement("input");
+    inp.type = "checkbox";
+    inp.id = obj[i];
+    inp.value = obj[i];
+    inp.className = "checkBoxInput";
+    let label = createElement("label");
+    label.htmlFor = obj[i];
+    label.innerHTML = obj[i];
+    container.append(inp, label);
+    filterContent(inp);
+    brand.appendChild(container);
+  }
+}
+function createSizeFilter(obj) {
+  for (let i = 0; i < obj.length; i++) {
+    let container = createElement("div");
+    container.className = "filter-brand-container";
+    let inp = createElement("input");
+    inp.type = "checkbox";
+    inp.id = obj[i];
+    inp.value = obj[i];
+    inp.className = "checkBoxInput";
+    let label = createElement("label");
+    label.htmlFor = obj[i];
+    label.innerHTML = obj[i];
+    container.append(inp, label);
+    filterContent(inp);
+    sizes.appendChild(container);
+  }
+}
+function createColorFilter(obj) {
+  for (let i = 0; i < obj.length; i++) {
+    let container = createElement("div");
+    container.className = "filter-brand-container";
+    let inp = createElement("input");
+    inp.type = "checkbox";
+    inp.id = obj[i];
+    inp.value = obj[i];
+    inp.className = "checkBoxInput";
+    let label = createElement("label");
+    label.htmlFor = obj[i];
+    label.innerHTML = obj[i];
+    container.append(inp, label);
+    filterContent(inp);
+    colors.appendChild(container);
+  }
+}
+function filterContent(inp) {
+  inp.addEventListener("click", function () {
+    fetch("../products.json")
+      .then((res) => res.json())
+      .then((data) => {
+        let fetchedData = data.data;
+        let getProductsId = localStorage.getItem("productCategories");
+        let convArr = getProductsId.split(",");
+        let fetchedNum = convArr.map(convertIntoNumber);
+        console.log(fetchedNum);
+        // console.log(getProductsId);
+        fetchedData.forEach((item) => {
+          if (this.value == item.color) {
+            console.log(item);
+          }
+        });
+      });
+  });
+}
 let productsContainer = document.querySelector(".sub-category-products-lists");
+let brandNewArr = [];
+let colorNewArr = [];
+let sizeNewArr = [];
 fetch("../products.json")
   .then((res) => res.json())
   .then((data) => {
     let result = data.data;
 
-    result.forEach((item) => {
-      if (productCategoriesNum.includes(item.id)) {
-        const col = createElement("div");
-        col.className = "col-4";
-        const card = document.createElement("div");
-        const cardBody = document.createElement("div");
-        const cardContent = document.createElement("div");
-        const image = createElement("img");
-        card.className = "card";
-        cardBody.className = "card_body";
-        cardContent.className = "card_content";
-        const title = createElement("p");
-        const price = createElement("p");
-        title.id = "product_title";
-        price.id = "price";
-        image.src = item.image;
-        image.id = "category_product_img";
-        title.innerHTML = item.title;
-        price.innerHTML = `Nrs. ${item.price}`;
-        cardContent.append(title, price);
-        cardBody.append(image, cardContent);
-        card.appendChild(cardBody);
-        col.appendChild(card);
-        productsContainer.appendChild(col);
+    for (let i = 0; i < result.length; i++) {
+      if (productCategoriesNum.includes(result[i].id)) {
+        if (result[i].brand) {
+          brandNewArr.push(result[i].brand);
+        }
+        if (result[i].color) {
+          colorNewArr.push(result[i].color);
+        }
+        if (result[i].size) {
+          sizeNewArr.push(result[i].size);
+        }
+        createProducts(result[i]);
       }
-    });
+    }
+    function filterDuplicateBrand(arr) {
+      return [...new Set(arr)];
+    }
+    const removedDuplicateBrand = filterDuplicateBrand(brandNewArr);
+    const removedDuplicateColor = filterDuplicateBrand(colorNewArr);
+    const removedDuplicateSize = filterDuplicateBrand(sizeNewArr);
+    let colorTitle = document.getElementById("colorTitle");
+    let sizeTitle = document.getElementById("sizeTitle");
+    let brandTitle = document.getElementById("brandTitle");
+    if (removedDuplicateBrand.length >= 1) {
+      createBrandFilter(removedDuplicateBrand);
+    } else {
+      brandTitle.innerHTML = "";
+    }
+    if (removedDuplicateSize.length >= 1) {
+      createSizeFilter(removedDuplicateSize);
+    } else {
+      sizeTitle.innerHTML = "";
+    }
+    if (removedDuplicateColor.length >= 1) {
+      createColorFilter(removedDuplicateColor);
+    } else {
+      colorTitle.innerHTML = "";
+    }
   })
   .catch((err) => console.log(err));
 let productCategoryTitle = localStorage.getItem("categoryTitle");

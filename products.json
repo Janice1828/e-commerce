@@ -10,7 +10,8 @@
       "category": "Accessories",
       "subCategory": "Earphone",
       "brand": "Samsung",
-      "rating": 4
+      "rating": 4,
+      "color": "white"
     },
     {
       "id": 2,
@@ -22,7 +23,8 @@
       "category": "Accessories",
       "subCategory": "Earphone",
       "brand": "JBL",
-      "rating": 3
+      "rating": 3,
+      "color": "black"
     },
     {
       "id": 3,
@@ -34,7 +36,9 @@
       "category": "Accessories",
       "subCategory": "Watch",
       "brand": "Samsung",
-      "rating": 2
+      "rating": 2,
+      "size": "38mm",
+      "color": "black"
     },
     {
       "id": 4,
@@ -46,7 +50,9 @@
       "category": "Fashion",
       "subCategory": "Shoes",
       "brand": "Nike",
-      "rating": 4
+      "rating": 4,
+      "size": 40,
+      "color": "red"
     },
     {
       "id": 5,
@@ -70,7 +76,9 @@
       "category": "Fashion",
       "subCategory": "sunglasses",
       "brand": "Rayban",
-      "rating": 3.5
+      "rating": 3.5,
+      "size": "M",
+      "color": "black"
     },
     {
       "id": 7,
@@ -82,7 +90,9 @@
       "category": "Fashion",
       "subCategory": "Shoes",
       "brand": "Goldstar",
-      "rating": 2.5
+      "rating": 2.5,
+      "size": 35,
+      "color": "white"
     },
     {
       "id": 8,
@@ -94,7 +104,9 @@
       "category": "Fashion",
       "subCategory": "Shoes",
       "brand": "Caliber",
-      "rating": 3
+      "rating": 3,
+      "size": 33,
+      "color": "green"
     },
     {
       "id": 9,
@@ -118,7 +130,9 @@
       "category": "Fashion",
       "subCategory": "sunglasses",
       "brand": "NewMew",
-      "rating": 1.5
+      "rating": 1.5,
+      "size": "XL",
+      "color": "black"
     },
     {
       "id": 11,
@@ -130,7 +144,8 @@
       "category": "Cosmetics",
       "subCategory": "Lipstick",
       "brand": "Misumi",
-      "rating": 5
+      "rating": 5,
+      "color": "red"
     },
     {
       "id": 12,
@@ -154,7 +169,9 @@
       "category": "Fashion",
       "subCategory": "Shoes",
       "brand": "Caliber",
-      "rating": 5
+      "rating": 5,
+      "size": 35,
+      "color": "blue"
     },
     {
       "id": 14,
@@ -166,7 +183,9 @@
       "category": "Sports",
       "subCategory": "Shoes",
       "brand": "Caliber",
-      "rating": 2
+      "rating": 2,
+      "size": 36,
+      "color": "blue"
     },
     {
       "id": 15,
@@ -178,7 +197,9 @@
       "category": "Accessories",
       "subCategory": "Watch",
       "brand": "Navi Force",
-      "rating": 4
+      "rating": 4,
+      "size": "39mm",
+      "color": "white"
     }
   ]
 }

@@ -184,6 +184,10 @@
   margin-top: 10px;
   border-top: 1px solid #b8b4b4;
 }
+.zoom-image {
+  object-fit: cover;
+  object-position: center;
+}
 .products_heading {
   font-weight: 900;
   display: flex;
@@ -613,9 +617,35 @@
   padding-bottom: 50px;
 }
 .filtering-product-section {
-  box-shadow: 0px 0px 1px 1px #000;
-  padding: 20px 15px;
+  box-shadow: 0px 0px 3px 1px #d2d2d2;
+  padding: 20px 0 20px 40px;
 }
 .sub-category-products-lists {
   padding: 0px 50px;
+}
+.filter-brand-container,
+.filter-size-container,
+.filter-color-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+#brandTitle,
+#colorTitle,
+#sizeTitle {
+  padding-bottom: 7px;
+}
+#sizes,
+#colors,
+#brands {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.checkBoxInput {
+  height: 25px;
+  width: 19px;
+}
+#subCategoriesLink {
+  text-decoration: none;
 }
