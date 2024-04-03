@@ -1,6 +1,9 @@
 const productCatogeriesId = localStorage.getItem("productCategories");
 const productCatogeriesArr = productCatogeriesId.split(",");
 const categoryTitle = document.getElementById("categoryTitle");
+let productsContainer = document.querySelector(".sub-category-products-lists");
+let productCategoryTitle = localStorage.getItem("categoryTitle");
+
 function convertIntoNumber(arr) {
   return Number(arr);
 }
@@ -8,7 +11,6 @@ function createElement(elementName) {
   return document.createElement(elementName);
 }
 let productCategoriesNum = productCatogeriesArr.map(convertIntoNumber);
-// console.log(productCategoriesNum);
 function selectById(idName) {
   return document.getElementById(idName);
 }
@@ -71,7 +73,6 @@ function createBrandFilter(obj) {
     label.htmlFor = obj[i];
     label.innerHTML = obj[i];
     container.append(inp, label);
-    filterContent(inp);
     brand.appendChild(container);
   }
 }
@@ -88,7 +89,6 @@ function createSizeFilter(obj) {
     label.htmlFor = obj[i];
     label.innerHTML = obj[i];
     container.append(inp, label);
-    filterContent(inp);
     sizes.appendChild(container);
   }
 }
@@ -109,34 +109,70 @@ function createColorFilter(obj) {
     colors.appendChild(container);
   }
 }
+let filteredids = [];
+let ids = localStorage.getItem("filterCategory");
+let toArr = ids.split(",");
+let fetchedNumbers = toArr.map(convertIntoNumber);
 function filterContent(inp) {
-  inp.addEventListener("click", function () {
-    fetch("../products.json")
-      .then((res) => res.json())
-      .then((data) => {
-        let fetchedData = data.data;
-        let getProductsId = localStorage.getItem("productCategories");
-        let convArr = getProductsId.split(",");
-        let fetchedNum = convArr.map(convertIntoNumber);
-        console.log(fetchedNum);
-        // console.log(getProductsId);
-        fetchedData.forEach((item) => {
-          if (this.value == item.color) {
-            console.log(item);
-          }
-        });
+  fetch("../products.json")
+    .then((res) => res.json())
+    .then((data) => {
+      let fetchedData = data.data;
+      inp.addEventListener("change", function () {
+        productsContainer.innerHTML = "";
+        if (inp.checked) {
+          fetchedData.forEach((item) => {
+            if (
+              item.color == this.value &&
+              item.category == productCategoryTitle
+            ) {
+              filteredids.push(item.id);
+            }
+          });
+          localStorage.setItem("filterCategory", filteredids);
+          fetchedData.forEach((item) => {
+            if (filteredids.includes(item.id)) {
+              createProducts(item);
+            }
+          });
+        } else {
+          productsContainer.innerHTML = "";
+          fetchedData.forEach((item) => {
+            if (
+              item.color == this.value &&
+              item.category == productCategoryTitle
+            ) {
+              let ind = filteredids.indexOf(item.id);
+              filteredids.splice(ind, 1);
+              localStorage.setItem("filterCategory", filteredids);
+            }
+          });
+          fetchedData.forEach((item) => {
+            if (filteredids.includes(item.id)) {
+              createProducts(item);
+            }
+          });
+        }
+        console.log(filteredids);
+        if (filteredids.length < 1) {
+          fetchedData.forEach((item) => {
+            if (item.category == productCategoryTitle) {
+              createProducts(item);
+            }
+          });
+        }
       });
-  });
+    });
 }
-let productsContainer = document.querySelector(".sub-category-products-lists");
+
 let brandNewArr = [];
 let colorNewArr = [];
+
 let sizeNewArr = [];
 fetch("../products.json")
   .then((res) => res.json())
   .then((data) => {
     let result = data.data;
-
     for (let i = 0; i < result.length; i++) {
       if (productCategoriesNum.includes(result[i].id)) {
         if (result[i].brand) {
@@ -148,6 +184,10 @@ fetch("../products.json")
         if (result[i].size) {
           sizeNewArr.push(result[i].size);
         }
+      }
+    }
+    for (let i = 0; i < result.length; i++) {
+      if (productCategoriesNum.includes(result[i].id)) {
         createProducts(result[i]);
       }
     }
@@ -177,5 +217,4 @@ fetch("../products.json")
     }
   })
   .catch((err) => console.log(err));
-let productCategoryTitle = localStorage.getItem("categoryTitle");
 categoryTitle.innerHTML = productCategoryTitle;
