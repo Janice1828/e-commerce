@@ -3,6 +3,7 @@ const productCatogeriesArr = productCatogeriesId.split(",");
 const categoryTitle = document.getElementById("categoryTitle");
 let productsContainer = document.querySelector(".sub-category-products-lists");
 let productCategoryTitle = localStorage.getItem("categoryTitle");
+let filteredids = [];
 
 function convertIntoNumber(arr) {
   return Number(arr);
@@ -74,6 +75,7 @@ function createBrandFilter(obj) {
     label.innerHTML = obj[i];
     container.append(inp, label);
     brand.appendChild(container);
+    filterContentBrand(inp);
   }
 }
 function createSizeFilter(obj) {
@@ -90,6 +92,7 @@ function createSizeFilter(obj) {
     label.innerHTML = obj[i];
     container.append(inp, label);
     sizes.appendChild(container);
+    filterContentSize(inp);
   }
 }
 function createColorFilter(obj) {
@@ -109,7 +112,6 @@ function createColorFilter(obj) {
     colors.appendChild(container);
   }
 }
-let filteredids = [];
 let ids = localStorage.getItem("filterCategory");
 let toArr = ids.split(",");
 let fetchedNumbers = toArr.map(convertIntoNumber);
@@ -140,6 +142,108 @@ function filterContent(inp) {
           fetchedData.forEach((item) => {
             if (
               item.color == this.value &&
+              item.category == productCategoryTitle
+            ) {
+              let ind = filteredids.indexOf(item.id);
+              filteredids.splice(ind, 1);
+              localStorage.setItem("filterCategory", filteredids);
+            }
+          });
+          fetchedData.forEach((item) => {
+            if (filteredids.includes(item.id)) {
+              createProducts(item);
+            }
+          });
+        }
+        console.log(filteredids);
+        if (filteredids.length < 1) {
+          fetchedData.forEach((item) => {
+            if (item.category == productCategoryTitle) {
+              createProducts(item);
+            }
+          });
+        }
+      });
+    });
+}
+function filterContentSize(inp) {
+  fetch("../products.json")
+    .then((res) => res.json())
+    .then((data) => {
+      let fetchedData = data.data;
+      inp.addEventListener("change", function () {
+        productsContainer.innerHTML = "";
+        if (inp.checked) {
+          fetchedData.forEach((item) => {
+            if (
+              item.size == this.value &&
+              item.category == productCategoryTitle
+            ) {
+              filteredids.push(item.id);
+            }
+          });
+          localStorage.setItem("filterCategory", filteredids);
+          fetchedData.forEach((item) => {
+            if (filteredids.includes(item.id)) {
+              createProducts(item);
+            }
+          });
+        } else {
+          productsContainer.innerHTML = "";
+          fetchedData.forEach((item) => {
+            if (
+              item.size == this.value &&
+              item.category == productCategoryTitle
+            ) {
+              let ind = filteredids.indexOf(item.id);
+              filteredids.splice(ind, 1);
+              localStorage.setItem("filterCategory", filteredids);
+            }
+          });
+          fetchedData.forEach((item) => {
+            if (filteredids.includes(item.id)) {
+              createProducts(item);
+            }
+          });
+        }
+        console.log(filteredids);
+        if (filteredids.length < 1) {
+          fetchedData.forEach((item) => {
+            if (item.category == productCategoryTitle) {
+              createProducts(item);
+            }
+          });
+        }
+      });
+    });
+}
+function filterContentBrand(inp) {
+  fetch("../products.json")
+    .then((res) => res.json())
+    .then((data) => {
+      let fetchedData = data.data;
+      inp.addEventListener("change", function () {
+        productsContainer.innerHTML = "";
+        if (inp.checked) {
+          fetchedData.forEach((item) => {
+            if (
+              item.brand == this.value &&
+              item.category == productCategoryTitle
+            ) {
+              filteredids.push(item.id);
+            }
+          });
+          localStorage.setItem("filterCategory", filteredids);
+          fetchedData.forEach((item) => {
+            if (filteredids.includes(item.id)) {
+              createProducts(item);
+            }
+          });
+        } else {
+          productsContainer.innerHTML = "";
+          fetchedData.forEach((item) => {
+            if (
+              item.brand == this.value &&
               item.category == productCategoryTitle
             ) {
               let ind = filteredids.indexOf(item.id);
