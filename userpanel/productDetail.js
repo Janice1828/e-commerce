@@ -39,6 +39,12 @@ try {
         totalqty += Number(qtyId);
       }
     }
+    result.data.forEach((item) => {
+      let ratingProduct = sessionStorage.getItem(`ratingProduct${item.id}`);
+      if (!ratingProduct) {
+        sessionStorage.setItem(`ratingProduct${item.id}`, item.rating);
+      }
+    });
     orderedNumber.innerHTML = totalqty;
     function filterById(jsonObject, id) {
       return jsonObject.filter(function (jsonObject) {
@@ -49,7 +55,8 @@ try {
     title.innerHTML = response.title;
     description.innerHTML = response.description;
     price.innerHTML = `$ ${response.price}`;
-    rate.innerHTML = getStarss(response.rating);
+    let fetchingRate = sessionStorage.getItem(`ratingProduct${response.id}`);
+    rate.innerHTML = getStarss(fetchingRate);
     image.src = response.image;
     var options = {
       width: 500,
@@ -111,7 +118,6 @@ if (loggedIn != "true") {
   document.querySelector(".cart").style.display = "none";
   document.querySelector("#logout").style.display = "none";
 }
-
 function getStarss(rating) {
   let value = Math.round(rating * 2) / 2;
   let output = [];
@@ -132,4 +138,55 @@ if (!loggedIn) {
   errmsg.style.display = "block";
 } else {
   errmsg.style.display = "none";
+}
+let stars = document.getElementsByClassName("star");
+let ratingStar = 0;
+function gfg(n) {
+  remove();
+  for (let i = 0; i < n; i++) {
+    if (n == 1) {
+      cls = "one";
+      ratingStar = 1;
+    } else if (n == 2) {
+      cls = "two";
+      ratingStar = 2;
+    } else if (n == 3) {
+      cls = "three";
+      ratingStar = 3;
+    } else if (n == 4) {
+      cls = "four";
+      ratingStar = 4;
+    } else if (n == 5) {
+      cls = "five";
+      ratingStar = 5;
+    }
+    stars[i].className = "star " + cls;
+  }
+  console.log(ratingStar);
+}
+function remove() {
+  let i = 0;
+  while (i < 5) {
+    stars[i].className = "star";
+    i++;
+  }
+}
+function rateIt() {
+  let fetchRating = sessionStorage.getItem(`ratingProduct${product_id}`);
+  if (ratingStar >= 1 && ratingStar <= 2) {
+    if (fetchRating > 1) {
+      sessionStorage.setItem(
+        `ratingProduct${product_id}`,
+        Number(fetchRating) - Number(0.5)
+      );
+    }
+  } else if (ratingStar >= 4 && ratingStar <= 5) {
+    if (fetchRating < 5) {
+      sessionStorage.setItem(
+        `ratingProduct${product_id}`,
+        Number(fetchRating) + Number(0.5)
+      );
+    }
+  }
+  location.reload();
 }

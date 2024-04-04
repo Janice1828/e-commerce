@@ -457,7 +457,7 @@
 #payButton {
   padding: 6px 35px;
   border-radius: 7px;
-  background-color: #676767;
+  background-color: #b1b1b1;
   color: #fff;
   outline: none;
   border: none;
@@ -657,4 +657,45 @@
 }
 .quantityContainer span {
   padding: 0px 10px;
+}
+.btn {
+  margin-top: 10px;
+  padding: 10px 30px;
+  cursor: pointer;
+  border-radius: 7px;
+  outline: none;
+}
+.btn-secondary {
+  background-color: #d9d9d9;
+  border: 0px;
+}
+.rating-section {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+.star {
+  font-size: 30px;
+  cursor: pointer;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+.one {
+  color: rgb(255, 0, 0);
+}
+.two {
+  color: rgb(255, 106, 0);
+}
+.three {
+  color: #4050b2;
+}
+.four {
+  color: #4050b2;
+}
+.five {
+  color: rgb(24, 159, 14);
+}
+#rateProduct {
+  font-size: 16px;
+  font-weight: bold;
 }
