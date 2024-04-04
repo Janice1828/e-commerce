@@ -363,7 +363,7 @@
 }
 #increaseOrder,
 #decreaseOrder {
-  padding: 0px 10px;
+  padding: 0px 30px;
   font-size: 25px;
   cursor: pointer;
 }
@@ -648,4 +648,13 @@
 }
 #subCategoriesLink {
   text-decoration: none;
+}
+
+.quantityContainer button {
+  padding: 0px 20px;
+  outline: none;
+  border: none;
+}
+.quantityContainer span {
+  padding: 0px 10px;
 }

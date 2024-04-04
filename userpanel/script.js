@@ -20,9 +20,15 @@ if (loggedIn != "true") {
 }
 let cards_container = document.getElementById("api_fetchedproducts_row");
 async function fetchData() {
+  let totalQty = 0;
   let fetchData = await fetch("../products.json");
   let res = await fetchData.json();
   let data = res.data;
+  data.forEach((item) => {
+    let productQty = sessionStorage.getItem(`product${item.id}`);
+    totalQty += Number(productQty);
+  });
+  orderedNumber.innerHTML = totalQty;
   function getCategory(obj) {
     return obj.category;
   }
@@ -131,12 +137,12 @@ function createProduct(item) {
   cards_container.appendChild(child);
 }
 if (totalAddToCart) {
-  let cartNumberConverting = totalAddToCart.split(",");
-  function convertingToNumber(n) {
-    return Number(n);
-  }
-  const cartArr = cartNumberConverting.map(convertingToNumber);
-  orderedNumber.innerHTML = cartArr.length;
+  // let cartNumberConverting = totalAddToCart.split(",");
+  // function convertingToNumber(n) {
+  //   return Number(n);
+  // }
+  // const cartArr = cartNumberConverting.map(convertingToNumber);
+  // orderedNumber.innerHTML = cartArr.length;
 } else {
   orderedNumber.innerHTML = 0;
 }
