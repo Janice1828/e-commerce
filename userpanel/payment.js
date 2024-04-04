@@ -39,12 +39,20 @@ if (productIds) {
   function convertNumber(num) {
     return Number(num);
   }
-  const numberproductIdArr = productIdArr.map(convertNumber);
-  orderedNumber.innerHTML = numberproductIdArr.length;
-
-  function filterProduct(data) {
-    for (let i = 0; i < numberproductIdArr.length; i++) {
-      if (numberproductIdArr[i] == data.id) {
+} else {
+  orderedNumber.innerHTML = 0;
+}
+let totalCosts = 0;
+let productsListContainer = document.getElementById("productList");
+fetch("../products.json")
+  .then((res) => res.json())
+  .then((data) => {
+    let result = data.data;
+    let cartNum = 0;
+    result.forEach((item) => {
+      let productid = sessionStorage.getItem(`product${item.id}`);
+      cartNum += Number(productid);
+      if (productid >= 1) {
         let col = createElement("div");
         col.className = "col-12";
         let card = createElement("div");
@@ -60,35 +68,27 @@ if (productIds) {
         let qtyContainer = createElement("div");
         qtyContainer.className = "payment-qty-container";
         let price = createElement("p");
-        price.innerHTML = `<b>Price :</b> $ ${data.discountedPrice}`;
+        let qty = createElement("p");
+        price.innerHTML = `<b>Price :</b> $ ${item.discountedPrice}`;
         image.id = "paymentId";
-        image.src = data.image;
-        title.innerHTML = data.title;
-        qtyContainer.append(price);
+        image.src = item.image;
+        title.innerHTML = item.title;
+        qtyContainer.append(price, qty);
         imgContainer.append(image, title);
+        qty.innerHTML = `<b>Quantity :</b> ${productid}`;
         flexContainer.append(imgContainer, qtyContainer);
         cardBody.appendChild(flexContainer);
         card.appendChild(cardBody);
         col.appendChild(card);
         productsListContainer.appendChild(col);
-        totalCosts += data.discountedPrice;
+        let p = item.discountedPrice * Number(productid);
+        totalCosts += p;
       }
-      const deliverCharge = 100;
-      const totalAmount = deliverCharge + Number(totalCosts);
-      itemsPrice.innerHTML = Math.round(totalCosts);
-      deliveryFee.innerHTML = deliverCharge;
-      totalPayment.innerHTML = Math.round(totalAmount);
-    }
-  }
-} else {
-  orderedNumber.innerHTML = 0;
-}
-let productsListContainer = document.getElementById("productList");
-fetch("../products.json")
-  .then((res) => res.json())
-  .then((data) => {
-    let result = data.data;
-    let filteredProducts = result.filter(filterProduct);
+    });
+    console.log(totalCosts);
+    itemsPrice.innerHTML = totalCosts;
+    deliveryFee.innerHTML = 100;
+    totalPayment.innerHTML = 100 + totalCosts;
+    orderedNumber.innerHTML = cartNum;
   })
   .catch((err) => console.log(err.message));
-let totalCosts = 0;
