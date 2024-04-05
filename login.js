@@ -1,12 +1,13 @@
 let show_hide = document.getElementById("show_or_hide");
 let password = document.getElementById("password");
+let showHideIcon = document.getElementById("showHide");
 show_hide.addEventListener("click", () => {
   if (password.type == "password") {
     password.type = "text";
-    show_hide.textContent = "Hide";
+    showHideIcon.className = "fa-solid fa-eye-slash";
   } else {
     password.type = "password";
-    show_hide.textContent = "Show";
+    showHideIcon.className = "fa-solid fa-eye";
   }
 });
 let get_email = localStorage.getItem("email");

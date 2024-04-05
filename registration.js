@@ -9,14 +9,15 @@ let cPasswordError = document.getElementById("cPasswordErr");
 let emailError = document.getElementById("emailErr");
 const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+const showHideIcon = document.getElementById("showHide");
 try {
   register_show_hide.addEventListener("click", () => {
     if (register_password.type == "password") {
       register_password.type = "text";
-      register_show_hide.textContent = "Hide";
+      showHideIcon.className = "fa-solid fa-eye-slash";
     } else {
       register_password.type = "password";
-      register_show_hide.textContent = "Show";
+      showHideIcon.className = "fa-solid fa-eye";
     }
   });
 } catch (err) {

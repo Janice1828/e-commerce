@@ -106,6 +106,7 @@ function decreaseOrder() {
 }
 if (loggedIn != "true") {
   document.querySelector(".order-adding-section").style.display = "none";
+  document.getElementById("product-rating-section").style.display = "none";
 }
 function logout() {
   sessionStorage.removeItem("loggedIn");

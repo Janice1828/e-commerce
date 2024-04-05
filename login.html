@@ -19,16 +19,22 @@
           <div>
             <label for="password">Password</label>
             <input type="password" id="password" required />
-            <button id="show_or_hide" type="button">Show</button>
+            <button id="show_or_hide" type="button">
+              <i class="fa-solid fa-eye" id="showHide"></i>
+            </button>
           </div>
           <p id="loginErr">Credentials didn't matched</p>
           <div>
-            <button id="login_btn" type="submit">Login</button>
+            <button id="login_btn" class="btn" type="submit">Login</button>
           </div>
         </form>
-        <p>or <a href="registration.html">signup?</a></p>
+        <p>or <a href="registration.html" id="orSignup">signup?</a></p>
       </div>
     </div>
   </body>
 </html>
 <script src="login.js"></script>
+<script
+  src="https://kit.fontawesome.com/8508bb06d2.js"
+  crossorigin="anonymous"
+></script>

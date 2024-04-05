@@ -105,7 +105,7 @@
   font-size: 25px;
 }
 .cart span {
-  font-size: 14px;
+  font-size: 11px;
   background: var(--yellow);
   color: #fff;
   position: absolute;
@@ -251,7 +251,7 @@
 .login_form_container,
 .registration_form_container {
   padding: 80px 25px;
-  box-shadow: 0px 0px 1px 1px #e5e5e5;
+  box-shadow: 0px 0px 5px 1px #e5e5e5;
   width: 350px;
   margin: auto;
   gap: 50px;
@@ -278,17 +278,15 @@
   padding: 7px 5px;
   outline: none;
   border: none;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--yellow);
 }
-.login_form_container form div #login_btn,
-.registration_form_container form div #register {
-  width: 70%;
-  border: 1px solid #000;
-  outline: none;
-  cursor: pointer;
-  padding: 10px;
-  margin-top: 30px;
-  border-radius: 20px;
+#orSignup:hover {
+  color: var(--yellow);
+  transition: 0.5s;
+}
+#orSignIn:hover {
+  color: var(--yellow);
+  transition: 0.5s;
 }
 .login_form_container form div label {
   width: 120px;
@@ -300,12 +298,16 @@
 .registration_form_container form div {
   position: relative;
 }
+#showHide {
+  font-size: 20px;
+  color: var(--yellow);
+}
 .login_form_container form div #show_or_hide {
   position: absolute;
-  top: 0px;
+  top: 23px;
   border: 0;
   outline: none;
-  right: 0px;
+  right: 4px;
   background: none;
   cursor: pointer;
 }
@@ -636,11 +638,6 @@
   background-color: #d9d9d9;
   border: 0px;
 }
-.rating-section {
-  padding-top: 0px;
-  margin-top: 0px;
-}
-
 .star {
   font-size: 30px;
   cursor: pointer;
@@ -743,6 +740,12 @@
   }
   .filtering-product-section {
     padding: 20px 0 20px 13px;
+  }
+  .products_headings {
+    padding-left: 0px !important;
+  }
+  .sub-category-container {
+    padding-top: 0px !important;
   }
 }
 @media screen and (max-width: 550px) {
@@ -848,4 +851,7 @@ h4,
 .fa-cart-shopping,
 .fa-right-from-bracket {
   color: var(--yellow);
+}
+#product-rating-section {
+  padding-top: 20px;
 }
