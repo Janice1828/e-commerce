@@ -100,7 +100,7 @@ function createElement(elementName) {
 }
 function createProduct(item) {
   let child = createElement("div");
-  child.className = "col-3";
+  child.className = "col-3 col-xl-4 col-md-6 col-sm-12";
   let link = createElement("a");
   link.addEventListener("click", () => {
     sessionStorage.setItem("product_id", item.id);

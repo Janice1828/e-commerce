@@ -38,9 +38,9 @@
     </div>
     <div class="h-100">
       <div class="singleproduct_detail_container">
-        <div class="card">
+        <div class="card remove-shadow-md">
           <div class="card_body product-detail-card">
-            <div id="img-container" style="width: 500px">
+            <div id="img-container">
               <img src="" alt="" class="zoom-image" />
             </div>
             <div class="card_content single-product-card-content">
@@ -61,7 +61,6 @@
                 ><span id="rating"></span>
               </div>
               <div class="order-adding-section">
-                <button id="add-to-cart-button">Add to cart</button>
                 <div id="increase-decrease-order">
                   <button onclick="decreaseOrder()" id="decreaseOrder">-</button
                   ><span id="add-tocart-number">1</span
@@ -69,15 +68,14 @@
                     +
                   </button>
                 </div>
+                <button id="add-to-cart-button" class="btn">Add to cart</button>
               </div>
               <div class="errMessage">
                 <h3>Please Login To Purchase Items</h3>
               </div>
               <div class="d-flex">
                 <div>
-                  <!-- <h5>Rate It:</h5> -->
                   <div class="rating-section">
-                    <br />
                     <span onclick="gfg(1)" class="star">★ </span>
                     <span onclick="gfg(2)" class="star">★ </span>
                     <span onclick="gfg(3)" class="star">★ </span>
@@ -85,11 +83,7 @@
                     <span onclick="gfg(5)" class="star">★ </span>
                   </div>
                 </div>
-                <button
-                  class="btn btn-secondary"
-                  onclick="rateIt()"
-                  id="rateProduct"
-                >
+                <button class="btn" onclick="rateIt()" id="rateProduct">
                   Rate Product
                 </button>
               </div>

@@ -4,7 +4,7 @@ const categoryTitle = document.getElementById("categoryTitle");
 let productsContainer = document.querySelector(".sub-category-products-lists");
 let productCategoryTitle = localStorage.getItem("categoryTitle");
 let filteredids = [];
-
+let cartNumber = document.getElementById("cart-order-number");
 function convertIntoNumber(arr) {
   return Number(arr);
 }
@@ -29,7 +29,7 @@ if (loggedIn != "true") {
 }
 function createProducts(item) {
   const col = createElement("div");
-  col.className = "col-4";
+  col.className = "col-4 col-sm-6 col-sm-12";
   let link = createElement("a");
   link.id = "subCategoriesLink";
   link.href = "./productDetail.html";
@@ -112,9 +112,9 @@ function createColorFilter(obj) {
     colors.appendChild(container);
   }
 }
-let ids = localStorage.getItem("filterCategory");
-let toArr = ids.split(",");
-let fetchedNumbers = toArr.map(convertIntoNumber);
+// let ids = localStorage.getItem("filterCategory");
+// let toArr = ids.split(",");
+// let fetchedNumbers = toArr.map(convertIntoNumber);
 function filterContent(inp) {
   fetch("../products.json")
     .then((res) => res.json())
@@ -277,6 +277,13 @@ fetch("../products.json")
   .then((res) => res.json())
   .then((data) => {
     let result = data.data;
+    let totalCartNumber = 0;
+    result.forEach((item) => {
+      let fetchCartId = sessionStorage.getItem(`product${item.id}`);
+      totalCartNumber += Number(fetchCartId);
+    });
+    cartNumber.innerHTML = totalCartNumber;
+    // console.log(result);
     for (let i = 0; i < result.length; i++) {
       if (productCategoriesNum.includes(result[i].id)) {
         if (result[i].brand) {
