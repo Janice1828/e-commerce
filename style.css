@@ -883,3 +883,11 @@ h4,
   color: red;
   outline: 1px solid red;
 }
+#giveReview {
+  width: 50%;
+  outline: none;
+  padding: 10px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  border: 1px solid var(--yellow);
+}

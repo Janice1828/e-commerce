@@ -112,9 +112,6 @@ function createColorFilter(obj) {
     colors.appendChild(container);
   }
 }
-// let ids = localStorage.getItem("filterCategory");
-// let toArr = ids.split(",");
-// let fetchedNumbers = toArr.map(convertIntoNumber);
 function filterContent(inp) {
   fetch("../products.json")
     .then((res) => res.json())
