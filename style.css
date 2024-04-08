@@ -874,3 +874,12 @@ h4,
     transform: rotate(360deg);
   }
 }
+.btn-delete {
+  background: red;
+  color: #fff;
+}
+.btn-delete:hover {
+  background: #fff;
+  color: red;
+  outline: 1px solid red;
+}
