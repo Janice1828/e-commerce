@@ -1,22 +1,19 @@
+let payingProductNumber = [];
 function createElement(elementName) {
   return document.createElement(elementName);
 }
 function selectById(idName) {
   return document.getElementById(idName);
 }
+function convertNumber(num) {
+  return Number(num);
+}
 let itemsPrice = selectById("itemsPrice");
 let deliveryFee = selectById("deliveryFee");
 let totalPayment = selectById("totalPayment");
 
 let payBtn = document.getElementById("payButton");
-payBtn.addEventListener("click", () => {
-  let makePayment = confirm("Are you Sure?");
-  if (makePayment == true) {
-    alert("Payment Successfull");
-    localStorage.removeItem("added_product_id");
-    window.location.href = "home.html";
-  }
-});
+
 function logout() {
   sessionStorage.removeItem("loggedIn");
   window.location.href = "../login.html";
@@ -36,18 +33,42 @@ let orderedNumber = document.querySelector(".cart-order-number");
 let productIds = localStorage.getItem("added_product_id");
 if (productIds) {
   const productIdArr = productIds.split(",");
-  function convertNumber(num) {
-    return Number(num);
-  }
 } else {
   orderedNumber.innerHTML = 0;
 }
 let totalCosts = 0;
+let payingProductsId = [];
 let productsListContainer = document.getElementById("productList");
 fetch("../products.json")
   .then((res) => res.json())
   .then((data) => {
     let result = data.data;
+    // console.log(result[i].id);
+    function removeProducts() {
+      for (let i = 0; i < result.length; i++) {
+        // console.log(`product${result[i].id}`);
+        sessionStorage.setItem(`product${result[i].id}`, 0);
+        location.reload();
+      }
+    }
+    let purchasedProducts = [];
+    payBtn.addEventListener("click", () => {
+      let makePayment = confirm("Are you Sure?");
+      for (let i = 0; i < payingProductNumber.length; i++) {
+        purchasedProducts.push(payingProductNumber[i]);
+      }
+      // console.log(purchasedProducts);
+      localStorage.setItem("purchasedProducts", purchasedProducts);
+      removeProducts();
+    });
+
+    result.forEach((data) => {
+      let fetchQtyId = sessionStorage.getItem(`product${data.id}`);
+      if (fetchQtyId > 0) {
+        payingProductsId.push(data.id);
+      }
+    });
+    payingProductNumber = payingProductsId.map(convertNumber);
     let cartNum = 0;
     result.forEach((item) => {
       let productid = sessionStorage.getItem(`product${item.id}`);
@@ -86,7 +107,7 @@ fetch("../products.json")
         totalCosts += p;
       }
     });
-    console.log(totalCosts);
+    // console.log(totalCosts);
     itemsPrice.innerHTML = totalCosts;
     deliveryFee.innerHTML = 100;
     totalPayment.innerHTML = 100 + totalCosts;

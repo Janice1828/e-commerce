@@ -32,7 +32,7 @@ function Register() {
         alert("User Registered successfully!");
         event.preventDefault();
         localStorage.removeItem("added_product_id");
-
+        localStorage.setItem("purchasedProducts", 0);
         window.location.href = "login.html";
       } else {
         passwordError.style.display = "block";

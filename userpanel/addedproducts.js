@@ -31,7 +31,7 @@ fetch("../products.json")
         increaseQty.textContent = "+";
         let td6 = createElement("td");
         td6.className = "quantityContainer";
-        td6.append(increaseQty, qtyValue, decreaseQty);
+        td6.append(decreaseQty, qtyValue, increaseQty);
         let btn = createElement("button");
         btn.className = "delete-order-button";
         btn.value = item.id;

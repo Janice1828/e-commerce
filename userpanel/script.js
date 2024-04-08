@@ -19,82 +19,118 @@ if (loggedIn != "true") {
   document.querySelector("#logout").style.display = "none";
 }
 let cards_container = document.getElementById("api_fetchedproducts_row");
-async function fetchData() {
-  let totalQty = 0;
-  let fetchData = await fetch("../products.json");
-  let res = await fetchData.json();
-  let data = res.data;
-  data.forEach((item) => {
-    let productQty = sessionStorage.getItem(`product${item.id}`);
-    totalQty += Number(productQty);
-  });
-  orderedNumber.innerHTML = totalQty;
-  function getCategory(obj) {
-    return obj.category;
-  }
-  let categoryArr = data.map(getCategory);
-  function removeDuplicateCategory(arr) {
-    return [...new Set(arr)];
-  }
-  let result = removeDuplicateCategory(categoryArr);
-  result.forEach((item) => {
-    let opt = createElement("option");
-    opt.textContent = item;
-    opt.value = item;
-    category.append(opt);
-  });
-  try {
-    function displayAll() {
-      data.forEach((item) => {
-        createProduct(item);
+
+setTimeout(() => {
+  document.querySelector(".loader").style.display = "none";
+  async function fetchData() {
+    let totalQty = 0;
+    let fetchData = await fetch("../products.json");
+    let res = await fetchData.json();
+    let data = res.data;
+    data.forEach((item) => {
+      let productQty = sessionStorage.getItem(`product${item.id}`);
+      totalQty += Number(productQty);
+      let child = createElement("div");
+      child.className = "col-3 col-xl-4 col-md-6 col-sm-12";
+      let link = createElement("a");
+      link.addEventListener("click", () => {
+        sessionStorage.setItem("product_id", item.id);
       });
-    }
-    displayAll();
-    let storageCategory = [];
-    let categoryName = "";
-    category.addEventListener("change", function () {
-      storageCategory = [];
-      cards_container.innerHTML = "";
-      data.forEach((item) => {
-        if (this.value == "Accessories" && item.category == "Accessories") {
-          if ((item.category = "Accessories")) {
-            storageCategory.push(item.id);
-            categoryName = "Accessories";
-            localStorage.setItem("categoryTitle", categoryName);
-          }
-          window.location.href = "./subCategory.html";
-        } else if (this.value == "Fashion" && item.category == "Fashion") {
-          if ((item.category = "Fashion")) {
-            storageCategory.push(item.id);
-            categoryName = "Fashion";
-            localStorage.setItem("categoryTitle", categoryName);
-          }
-          window.location.href = "./subCategory.html";
-        } else if (this.value == "Cosmetics" && item.category == "Cosmetics") {
-          if ((item.category = "Cosmetics")) {
-            storageCategory.push(item.id);
-            categoryName = "Cosmetics";
-            localStorage.setItem("categoryTitle", categoryName);
-          }
-          window.location.href = "./subCategory.html";
-        } else if (this.value == "Sports" && item.category == "Sports") {
-          if ((item.category = "Sports")) {
-            storageCategory.push(item.id);
-            categoryName = "Sports";
-            localStorage.setItem("categoryTitle", categoryName);
-          }
-          window.location.href = "./subCategory.html";
-        } else if (this.value == "all") {
-          createProduct(item);
-        }
-      });
-      localStorage.setItem("productCategories", storageCategory);
+      link.className = "link_card";
+      link.href = "productDetail.html";
+      let card = createElement("div");
+      card.className = "card";
+      let card_body = createElement("div");
+      card_body.className = "card_body";
+      let img = document.createElement("div");
+      img.innerHTML = `<img src=${item.image} class="product_image" alt="Image"/>`;
+      img.id = "fetched_product_img";
+      let card_content = createElement("div");
+      card_content.className = "card_content";
+      let title = createElement("p");
+      title.id = "product_title";
+      card.title = item.title;
+      let price = createElement("p");
+      price.id = "price";
+      let discountedPrice = createElement("strike");
+      discountedPrice.id = "discountedPrice";
+      link.appendChild(card);
+      child.appendChild(link);
+      card.appendChild(card_body);
+      card_body.append(img, card_content);
+      card_content.appendChild(title);
+      card_content.append(price, discountedPrice);
+      title.textContent = item.title;
+      discountedPrice.textContent = "Nrs." + item.price;
+      price.textContent = "Nrs. " + item.discountedPrice;
+      cards_container.appendChild(child);
     });
-  } catch (err) {
-    console.error(err.message);
+    orderedNumber.innerHTML = totalQty;
+    function getCategory(obj) {
+      return obj.category;
+    }
+    let categoryArr = data.map(getCategory);
+    function removeDuplicateCategory(arr) {
+      return [...new Set(arr)];
+    }
+    let result = removeDuplicateCategory(categoryArr);
+    result.forEach((item) => {
+      let opt = createElement("option");
+      opt.textContent = item;
+      opt.value = item;
+      category.append(opt);
+    });
+    try {
+      let storageCategory = [];
+      let categoryName = "";
+      category.addEventListener("change", function () {
+        storageCategory = [];
+        cards_container.innerHTML = "";
+        data.forEach((item) => {
+          if (this.value == "Accessories" && item.category == "Accessories") {
+            if ((item.category = "Accessories")) {
+              storageCategory.push(item.id);
+              categoryName = "Accessories";
+              localStorage.setItem("categoryTitle", categoryName);
+            }
+            window.location.href = "./subCategory.html";
+          } else if (this.value == "Fashion" && item.category == "Fashion") {
+            if ((item.category = "Fashion")) {
+              storageCategory.push(item.id);
+              categoryName = "Fashion";
+              localStorage.setItem("categoryTitle", categoryName);
+            }
+            window.location.href = "./subCategory.html";
+          } else if (
+            this.value == "Cosmetics" &&
+            item.category == "Cosmetics"
+          ) {
+            if ((item.category = "Cosmetics")) {
+              storageCategory.push(item.id);
+              categoryName = "Cosmetics";
+              localStorage.setItem("categoryTitle", categoryName);
+            }
+            window.location.href = "./subCategory.html";
+          } else if (this.value == "Sports" && item.category == "Sports") {
+            if ((item.category = "Sports")) {
+              storageCategory.push(item.id);
+              categoryName = "Sports";
+              localStorage.setItem("categoryTitle", categoryName);
+            }
+            window.location.href = "./subCategory.html";
+          } else if (this.value == "all") {
+            createProduct(item);
+          }
+        });
+        localStorage.setItem("productCategories", storageCategory);
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
   }
-}
-fetchData();
+  fetchData();
+}, 1000);
+
 function createElement(elementName) {
   return document.createElement(elementName);
 }
@@ -156,6 +192,7 @@ function findProduct(e) {
   fetch("../products.json")
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       let result = data.data;
       let filteredData = result.filter(filterValue);
       cards_container.innerHTML = "";
