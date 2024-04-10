@@ -29,7 +29,15 @@ if (loggedIn != "true") {
 }
 function createProducts(item) {
   const col = createElement("div");
-  col.className = "col-4 col-sm-6 col-sm-12";
+  col.className = "col-4 col-sm-6 col-sm-12 products";
+  function checkAttr() {
+    let a = item.color ? item.color : "";
+    let b = item.brand ? item.brand : "";
+    let c = item.size ? item.size : "";
+    let res = `${a} ${b} ${c}`;
+    return res.trim();
+  }
+  col.setAttribute("data-category", checkAttr());
   let link = createElement("a");
   link.id = "subCategoriesLink";
   link.href = "./productDetail.html";
@@ -61,57 +69,7 @@ function createProducts(item) {
 const brand = document.getElementById("brands");
 const colors = document.getElementById("colors");
 const sizes = document.getElementById("sizes");
-function createBrandFilter(obj) {
-  for (let i = 0; i < obj.length; i++) {
-    let container = createElement("div");
-    container.className = "filter-brand-container";
-    let inp = createElement("input");
-    inp.type = "checkbox";
-    inp.id = obj[i];
-    inp.value = obj[i];
-    inp.className = "checkBoxInput";
-    let label = createElement("label");
-    label.htmlFor = obj[i];
-    label.innerHTML = obj[i];
-    container.append(inp, label);
-    brand.appendChild(container);
-    filterContentBrand(inp);
-  }
-}
-function createSizeFilter(obj) {
-  for (let i = 0; i < obj.length; i++) {
-    let container = createElement("div");
-    container.className = "filter-brand-container";
-    let inp = createElement("input");
-    inp.type = "checkbox";
-    inp.id = obj[i];
-    inp.value = obj[i];
-    inp.className = "checkBoxInput";
-    let label = createElement("label");
-    label.htmlFor = obj[i];
-    label.innerHTML = obj[i];
-    container.append(inp, label);
-    sizes.appendChild(container);
-    filterContentSize(inp);
-  }
-}
-function createColorFilter(obj) {
-  for (let i = 0; i < obj.length; i++) {
-    let container = createElement("div");
-    container.className = "filter-brand-container";
-    let inp = createElement("input");
-    inp.type = "checkbox";
-    inp.id = obj[i];
-    inp.value = obj[i];
-    inp.className = "checkBoxInput";
-    let label = createElement("label");
-    label.htmlFor = obj[i];
-    label.innerHTML = obj[i];
-    container.append(inp, label);
-    filterContent(inp);
-    colors.appendChild(container);
-  }
-}
+
 function filterContent(inp) {
   fetch("../products.json")
     .then((res) => res.json())
@@ -152,7 +110,6 @@ function filterContent(inp) {
             }
           });
         }
-        console.log(filteredids);
         if (filteredids.length < 1) {
           fetchedData.forEach((item) => {
             if (item.category == productCategoryTitle) {
@@ -203,7 +160,6 @@ function filterContentSize(inp) {
             }
           });
         }
-        console.log(filteredids);
         if (filteredids.length < 1) {
           fetchedData.forEach((item) => {
             if (item.category == productCategoryTitle) {
@@ -254,7 +210,6 @@ function filterContentBrand(inp) {
             }
           });
         }
-        console.log(filteredids);
         if (filteredids.length < 1) {
           fetchedData.forEach((item) => {
             if (item.category == productCategoryTitle) {
@@ -280,7 +235,6 @@ fetch("../products.json")
       totalCartNumber += Number(fetchCartId);
     });
     cartNumber.innerHTML = totalCartNumber;
-    // console.log(result);
     for (let i = 0; i < result.length; i++) {
       if (productCategoriesNum.includes(result[i].id)) {
         if (result[i].brand) {
@@ -308,21 +262,115 @@ fetch("../products.json")
     let colorTitle = document.getElementById("colorTitle");
     let sizeTitle = document.getElementById("sizeTitle");
     let brandTitle = document.getElementById("brandTitle");
+
     if (removedDuplicateBrand.length >= 1) {
-      createBrandFilter(removedDuplicateBrand);
+      for (let i = 0; i < removedDuplicateBrand.length; i++) {
+        let container = createElement("div");
+        container.className = "filter-brand-container";
+        let inp = createElement("input");
+        inp.type = "checkbox";
+        inp.id = removedDuplicateBrand[i];
+        inp.value = removedDuplicateBrand[i];
+        inp.className = "checkBoxInput";
+        inp.name = "brand";
+        let label = createElement("label");
+        label.htmlFor = removedDuplicateBrand[i];
+        label.innerHTML = removedDuplicateBrand[i];
+        container.append(inp, label);
+        brand.appendChild(container);
+        // filterContentBrand(inp);
+      }
     } else {
       brandTitle.innerHTML = "";
     }
     if (removedDuplicateSize.length >= 1) {
-      createSizeFilter(removedDuplicateSize);
+      for (let i = 0; i < removedDuplicateSize.length; i++) {
+        let container = createElement("div");
+        container.className = "filter-brand-container";
+        let inp = createElement("input");
+        inp.type = "checkbox";
+        inp.id = removedDuplicateSize[i];
+        inp.name = "size";
+        inp.value = removedDuplicateSize[i];
+        inp.className = "checkBoxInput";
+        let label = createElement("label");
+        label.htmlFor = removedDuplicateSize[i];
+        label.innerHTML = removedDuplicateSize[i];
+        container.append(inp, label);
+        sizes.appendChild(container);
+        // filterContentSize(inp);
+      }
     } else {
       sizeTitle.innerHTML = "";
     }
     if (removedDuplicateColor.length >= 1) {
-      createColorFilter(removedDuplicateColor);
+      for (let i = 0; i < removedDuplicateColor.length; i++) {
+        let container = createElement("div");
+        container.className = "filter-brand-container";
+        let inp = createElement("input");
+        inp.type = "checkbox";
+        inp.id = removedDuplicateColor[i];
+        inp.value = removedDuplicateColor[i];
+        inp.name = "color";
+        inp.className = "checkBoxInput";
+        let label = createElement("label");
+        label.htmlFor = removedDuplicateColor[i];
+        label.innerHTML = removedDuplicateColor[i];
+        container.append(inp, label);
+        colors.appendChild(container);
+      }
     } else {
       colorTitle.innerHTML = "";
     }
   })
   .catch((err) => console.log(err));
 categoryTitle.innerHTML = productCategoryTitle;
+window.onload = function () {
+  var inps = document.querySelectorAll('input[type="checkbox"]');
+  function filterProducts() {
+    // let products = document.querySelectorAll(".products");
+    var selectedFilters = {};
+    inps.forEach(function (checkbox) {
+      if (checkbox.checked) {
+        if (!selectedFilters.hasOwnProperty(checkbox.name)) {
+          selectedFilters[checkbox.name] = [];
+        }
+        selectedFilters[checkbox.name].push(checkbox.value);
+      }
+    });
+    var filteredResults = document.querySelectorAll(".products");
+    for (var filterName in selectedFilters) {
+      if (selectedFilters.hasOwnProperty(filterName)) {
+        var filterValues = selectedFilters[filterName];
+        filteredResults = Array.prototype.filter.call(
+          filteredResults,
+          function (element) {
+            var matched = false;
+            var currentFilterValues = element
+              .getAttribute("data-category")
+              .split(" ");
+            console.log(currentFilterValues);
+            currentFilterValues.forEach(function (currentFilterValues) {
+              if (filterValues.indexOf(currentFilterValues) !== -1) {
+                matched = true;
+              }
+            });
+            return matched;
+          }
+        );
+        // console.log(filteredResults);
+      }
+    }
+    document.querySelectorAll(".products").forEach(function (element) {
+      element.style.display = "none";
+    });
+    filteredResults.forEach(function (element) {
+      element.style.display = "block";
+    });
+  }
+
+  inps.forEach(function (checkbox) {
+    checkbox.addEventListener("change", filterProducts);
+  });
+  console.log("asd");
+};

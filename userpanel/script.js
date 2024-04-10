@@ -209,3 +209,4 @@ function findProduct(e) {
     })
     .catch((err) => console.log(err));
 }
+console.log("asd");
