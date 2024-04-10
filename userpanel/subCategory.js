@@ -337,7 +337,6 @@ categoryTitle.innerHTML = productCategoryTitle;
 window.onload = function () {
   var inps = document.querySelectorAll('input[type="checkbox"]');
   function filterProducts() {
-    // let products = document.querySelectorAll(".products");
     var selectedFilters = {};
     inps.forEach(function (checkbox) {
       if (checkbox.checked) {
@@ -358,7 +357,6 @@ window.onload = function () {
             var currentFilterValues = element
               .getAttribute("data-category")
               .split(" ");
-            console.log(currentFilterValues);
             currentFilterValues.forEach(function (currentFilterValues) {
               if (filterValues.indexOf(currentFilterValues) !== -1) {
                 matched = true;
@@ -367,7 +365,6 @@ window.onload = function () {
             return matched;
           }
         );
-        // console.log(filteredResults);
       }
     }
     document.querySelectorAll(".products").forEach(function (element) {
@@ -381,5 +378,4 @@ window.onload = function () {
   inps.forEach(function (checkbox) {
     checkbox.addEventListener("change", filterProducts);
   });
-  console.log("asd");
 };

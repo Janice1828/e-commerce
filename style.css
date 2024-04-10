@@ -391,6 +391,7 @@
   justify-content: center;
 }
 .added-products-container table {
+  border-collapse: collapse;
   border-color: var(--yellow);
 }
 .added-products-container thead tr th,
@@ -675,6 +676,9 @@
   }
 }
 @media screen and (max-width: 750px) {
+  .added-products-container {
+    overflow-x: auto;
+  }
   #search_products {
     width: 200px;
   }
@@ -752,6 +756,9 @@
   .nav_bar_child_container {
     padding: 15px 10px !important;
   }
+  .btn {
+    padding: 7px 10px;
+  }
   #logo {
     height: 40px;
     width: 40px;
@@ -793,6 +800,13 @@
 }
 
 @media screen and (max-width: 430px) {
+  .added-products-container tbody tr td,
+  .added-products-container thead tr th {
+    padding: 0px;
+  }
+  .btn {
+    padding: 7px 5px;
+  }
   .nav_login_register {
     gap: 10px;
   }

@@ -43,10 +43,9 @@ fetch("../products.json")
   .then((res) => res.json())
   .then((data) => {
     let result = data.data;
-    // console.log(result[i].id);
+
     function removeProducts() {
       for (let i = 0; i < result.length; i++) {
-        // console.log(`product${result[i].id}`);
         sessionStorage.setItem(`product${result[i].id}`, 0);
         location.reload();
       }
@@ -57,7 +56,6 @@ fetch("../products.json")
       for (let i = 0; i < payingProductNumber.length; i++) {
         purchasedProducts.push(payingProductNumber[i]);
       }
-      // console.log(purchasedProducts);
       localStorage.setItem("purchasedProducts", purchasedProducts);
       removeProducts();
     });
@@ -107,10 +105,15 @@ fetch("../products.json")
         totalCosts += p;
       }
     });
-    // console.log(totalCosts);
+
     itemsPrice.innerHTML = totalCosts;
     deliveryFee.innerHTML = 100;
     totalPayment.innerHTML = 100 + totalCosts;
     orderedNumber.innerHTML = cartNum;
+    if (cartNum <= 0) {
+      document.getElementById("payButton").style.display = "none";
+      document.getElementById("deliveryFee").innerHTML = 0;
+      totalPayment.innerHTML = 0;
+    }
   })
   .catch((err) => console.log(err.message));

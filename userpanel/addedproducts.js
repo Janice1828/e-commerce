@@ -14,6 +14,7 @@ function ab() {
       response.forEach((item) => {
         let getQty = sessionStorage.getItem(`product${item.id}`);
         getNum += Number(getQty);
+
         let fetchQty = sessionStorage.getItem(`product${item.id}`);
         if (fetchQty >= 1) {
           let tr = createElement("tr");
@@ -102,7 +103,10 @@ function ab() {
           });
         }
       });
-      // console.log(getNum);
+      if (getNum <= 0) {
+        document.getElementById("proceedToPaymentBtn").style.pointerEvents =
+          "none";
+      }
       orderedNumber.innerHTML = getNum;
     });
 }
