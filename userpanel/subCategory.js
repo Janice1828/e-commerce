@@ -1,3 +1,12 @@
+function rel() {
+  let a = 0;
+  if (a < 0) {
+    location.reload();
+  }
+  a++;
+}
+rel();
+
 const productCatogeriesId = localStorage.getItem("productCategories");
 const productCatogeriesArr = productCatogeriesId.split(",");
 const categoryTitle = document.getElementById("categoryTitle");
