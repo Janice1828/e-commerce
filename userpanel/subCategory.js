@@ -49,10 +49,10 @@ function createProducts(item) {
   col.setAttribute("data-category", checkAttr());
   let link = createElement("a");
   link.id = "subCategoriesLink";
-  link.href = "./productDetail.html";
-  link.addEventListener("click", function () {
-    sessionStorage.setItem("product_id", item.id);
-  });
+  link.href = `./productDetail.html?productId=${item.id}`;
+  // link.addEventListener("click", function () {
+  //   sessionStorage.setItem("product_id", item.id);
+  // });
   const card = document.createElement("div");
   const cardBody = document.createElement("div");
   const cardContent = document.createElement("div");
