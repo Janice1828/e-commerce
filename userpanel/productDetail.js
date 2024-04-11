@@ -5,7 +5,8 @@ let image = document.querySelector(".zoom-image");
 let rate = document.getElementById("rating");
 let addToCart = selectById("add-to-cart-button");
 let addtoCart = selectById("add-tocart-number");
-let product_id = sessionStorage.getItem("product_id");
+const searchParams = new URLSearchParams(window.location.search);
+const product_id = searchParams.get("productId");
 function convertingToNumber(n) {
   return Number(n);
 }
@@ -202,3 +203,9 @@ if (purchasedProductsNumber.includes(Number(product_id))) {
 } else {
   document.getElementById("product-rating-section").style.display = "none";
 }
+// document.addEventListener("DOMContentLoaded", function () {
+//   const url = new URLSearchParams(window.location.search);
+//   url.set("productId", product_id);
+//   history.replaceState(null, null, "?" + url.toString());
+// });
+// console.log(product_id);

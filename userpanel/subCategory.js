@@ -273,109 +273,81 @@ fetch("../products.json")
     let brandTitle = document.getElementById("brandTitle");
 
     if (removedDuplicateBrand.length >= 1) {
-      for (let i = 0; i < removedDuplicateBrand.length; i++) {
-        let container = createElement("div");
-        container.className = "filter-brand-container";
-        let inp = createElement("input");
-        inp.type = "checkbox";
-        inp.id = removedDuplicateBrand[i];
-        inp.value = removedDuplicateBrand[i];
-        inp.className = "checkBoxInput";
-        inp.name = "brand";
-        let label = createElement("label");
-        label.htmlFor = removedDuplicateBrand[i];
-        label.innerHTML = removedDuplicateBrand[i];
-        container.append(inp, label);
-        brand.appendChild(container);
-        // filterContentBrand(inp);
-      }
+      createFilter(removedDuplicateBrand, "brand", brand);
     } else {
       brandTitle.innerHTML = "";
     }
     if (removedDuplicateSize.length >= 1) {
-      for (let i = 0; i < removedDuplicateSize.length; i++) {
-        let container = createElement("div");
-        container.className = "filter-brand-container";
-        let inp = createElement("input");
-        inp.type = "checkbox";
-        inp.id = removedDuplicateSize[i];
-        inp.name = "size";
-        inp.value = removedDuplicateSize[i];
-        inp.className = "checkBoxInput";
-        let label = createElement("label");
-        label.htmlFor = removedDuplicateSize[i];
-        label.innerHTML = removedDuplicateSize[i];
-        container.append(inp, label);
-        sizes.appendChild(container);
-        // filterContentSize(inp);
-      }
+      createFilter(removedDuplicateSize, "size", sizes);
     } else {
       sizeTitle.innerHTML = "";
     }
     if (removedDuplicateColor.length >= 1) {
-      for (let i = 0; i < removedDuplicateColor.length; i++) {
-        let container = createElement("div");
-        container.className = "filter-brand-container";
-        let inp = createElement("input");
-        inp.type = "checkbox";
-        inp.id = removedDuplicateColor[i];
-        inp.value = removedDuplicateColor[i];
-        inp.name = "color";
-        inp.className = "checkBoxInput";
-        let label = createElement("label");
-        label.htmlFor = removedDuplicateColor[i];
-        label.innerHTML = removedDuplicateColor[i];
-        container.append(inp, label);
-        colors.appendChild(container);
-      }
+      createFilter(removedDuplicateColor, "color", colors);
     } else {
       colorTitle.innerHTML = "";
     }
+    var inps = document.querySelectorAll('input[type="checkbox"]');
+    function filterProducts() {
+      var selectedFilters = {};
+      inps.forEach(function (checkbox) {
+        if (checkbox.checked) {
+          if (!selectedFilters.hasOwnProperty(checkbox.name)) {
+            selectedFilters[checkbox.name] = [];
+          }
+          selectedFilters[checkbox.name].push(checkbox.value);
+        }
+      });
+      var filteredResults = document.querySelectorAll(".products");
+      for (var filterName in selectedFilters) {
+        if (selectedFilters.hasOwnProperty(filterName)) {
+          var filterValues = selectedFilters[filterName];
+          filteredResults = Array.prototype.filter.call(
+            filteredResults,
+            function (element) {
+              var matched = false;
+              var currentFilterValues = element
+                .getAttribute("data-category")
+                .split(" ");
+              currentFilterValues.forEach(function (currentFilterValues) {
+                if (filterValues.indexOf(currentFilterValues) !== -1) {
+                  matched = true;
+                }
+              });
+              return matched;
+            }
+          );
+        }
+      }
+      document.querySelectorAll(".products").forEach(function (element) {
+        element.style.display = "none";
+      });
+      filteredResults.forEach(function (element) {
+        element.style.display = "block";
+      });
+    }
+
+    inps.forEach(function (checkbox) {
+      checkbox.addEventListener("change", filterProducts);
+    });
   })
   .catch((err) => console.log(err));
 categoryTitle.innerHTML = productCategoryTitle;
-window.onload = function () {
-  var inps = document.querySelectorAll('input[type="checkbox"]');
-  function filterProducts() {
-    var selectedFilters = {};
-    inps.forEach(function (checkbox) {
-      if (checkbox.checked) {
-        if (!selectedFilters.hasOwnProperty(checkbox.name)) {
-          selectedFilters[checkbox.name] = [];
-        }
-        selectedFilters[checkbox.name].push(checkbox.value);
-      }
-    });
-    var filteredResults = document.querySelectorAll(".products");
-    for (var filterName in selectedFilters) {
-      if (selectedFilters.hasOwnProperty(filterName)) {
-        var filterValues = selectedFilters[filterName];
-        filteredResults = Array.prototype.filter.call(
-          filteredResults,
-          function (element) {
-            var matched = false;
-            var currentFilterValues = element
-              .getAttribute("data-category")
-              .split(" ");
-            currentFilterValues.forEach(function (currentFilterValues) {
-              if (filterValues.indexOf(currentFilterValues) !== -1) {
-                matched = true;
-              }
-            });
-            return matched;
-          }
-        );
-      }
-    }
-    document.querySelectorAll(".products").forEach(function (element) {
-      element.style.display = "none";
-    });
-    filteredResults.forEach(function (element) {
-      element.style.display = "block";
-    });
+window.onload = function () {};
+function createFilter(data, dataName, appendingContainer) {
+  for (let i = 0; i < data.length; i++) {
+    let container = createElement("div");
+    container.className = `filter-${dataName}-container`;
+    let inp = createElement("input");
+    inp.type = "checkbox";
+    inp.id = data[i];
+    inp.value = data[i];
+    inp.className = "checkBoxInput";
+    inp.name = dataName;
+    let label = createElement("label");
+    label.htmlFor = data[i];
+    label.innerHTML = data[i];
+    container.append(inp, label);
+    appendingContainer.appendChild(container);
   }
-
-  inps.forEach(function (checkbox) {
-    checkbox.addEventListener("change", filterProducts);
-  });
-};
+}

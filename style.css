@@ -171,6 +171,12 @@
   padding-left: 7px;
   margin-top: 4px;
 }
+#search_products {
+  color: var(--yellow);
+  border: 0px;
+  outline: 1px solid var(--yellow);
+  /* border-radius: 0px; */
+}
 #product_title {
   white-space: nowrap;
   overflow: hidden;

@@ -33,11 +33,8 @@ setTimeout(() => {
       let child = createElement("div");
       child.className = "col-3 col-xl-4 col-md-6 col-sm-12";
       let link = createElement("a");
-      link.addEventListener("click", () => {
-        sessionStorage.setItem("product_id", item.id);
-      });
       link.className = "link_card";
-      link.href = "productDetail.html";
+      link.href = `productDetail.html?productId=${item.id}`;
       let card = createElement("div");
       card.className = "card";
       let card_body = createElement("div");
@@ -139,7 +136,7 @@ function createProduct(item) {
   child.className = "col-3 col-xl-4 col-md-6 col-sm-12";
   let link = createElement("a");
   link.addEventListener("click", () => {
-    sessionStorage.setItem("product_id", item.id);
+    localStorage.setItem("product_id", item.id);
   });
   link.className = "link_card";
   link.href = "productDetail.html";
