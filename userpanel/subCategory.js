@@ -1,3 +1,5 @@
+const queryParams = new URLSearchParams(window.location.search);
+
 function rel() {
   let a = 0;
   if (a < 0) {
@@ -50,9 +52,6 @@ function createProducts(item) {
   let link = createElement("a");
   link.id = "subCategoriesLink";
   link.href = `./productDetail.html?productId=${item.id}`;
-  // link.addEventListener("click", function () {
-  //   sessionStorage.setItem("product_id", item.id);
-  // });
   const card = document.createElement("div");
   const cardBody = document.createElement("div");
   const cardContent = document.createElement("div");
@@ -78,158 +77,6 @@ function createProducts(item) {
 const brand = document.getElementById("brands");
 const colors = document.getElementById("colors");
 const sizes = document.getElementById("sizes");
-
-function filterContent(inp) {
-  fetch("../products.json")
-    .then((res) => res.json())
-    .then((data) => {
-      let fetchedData = data.data;
-      inp.addEventListener("change", function () {
-        productsContainer.innerHTML = "";
-        if (inp.checked) {
-          fetchedData.forEach((item) => {
-            if (
-              item.color == this.value &&
-              item.category == productCategoryTitle
-            ) {
-              filteredids.push(item.id);
-            }
-          });
-          localStorage.setItem("filterCategory", filteredids);
-          fetchedData.forEach((item) => {
-            if (filteredids.includes(item.id)) {
-              createProducts(item);
-            }
-          });
-        } else {
-          productsContainer.innerHTML = "";
-          fetchedData.forEach((item) => {
-            if (
-              item.color == this.value &&
-              item.category == productCategoryTitle
-            ) {
-              let ind = filteredids.indexOf(item.id);
-              filteredids.splice(ind, 1);
-              localStorage.setItem("filterCategory", filteredids);
-            }
-          });
-          fetchedData.forEach((item) => {
-            if (filteredids.includes(item.id)) {
-              createProducts(item);
-            }
-          });
-        }
-        if (filteredids.length < 1) {
-          fetchedData.forEach((item) => {
-            if (item.category == productCategoryTitle) {
-              createProducts(item);
-            }
-          });
-        }
-      });
-    });
-}
-function filterContentSize(inp) {
-  fetch("../products.json")
-    .then((res) => res.json())
-    .then((data) => {
-      let fetchedData = data.data;
-      inp.addEventListener("change", function () {
-        productsContainer.innerHTML = "";
-        if (inp.checked) {
-          fetchedData.forEach((item) => {
-            if (
-              item.size == this.value &&
-              item.category == productCategoryTitle
-            ) {
-              filteredids.push(item.id);
-            }
-          });
-          localStorage.setItem("filterCategory", filteredids);
-          fetchedData.forEach((item) => {
-            if (filteredids.includes(item.id)) {
-              createProducts(item);
-            }
-          });
-        } else {
-          productsContainer.innerHTML = "";
-          fetchedData.forEach((item) => {
-            if (
-              item.size == this.value &&
-              item.category == productCategoryTitle
-            ) {
-              let ind = filteredids.indexOf(item.id);
-              filteredids.splice(ind, 1);
-              localStorage.setItem("filterCategory", filteredids);
-            }
-          });
-          fetchedData.forEach((item) => {
-            if (filteredids.includes(item.id)) {
-              createProducts(item);
-            }
-          });
-        }
-        if (filteredids.length < 1) {
-          fetchedData.forEach((item) => {
-            if (item.category == productCategoryTitle) {
-              createProducts(item);
-            }
-          });
-        }
-      });
-    });
-}
-function filterContentBrand(inp) {
-  fetch("../products.json")
-    .then((res) => res.json())
-    .then((data) => {
-      let fetchedData = data.data;
-      inp.addEventListener("change", function () {
-        productsContainer.innerHTML = "";
-        if (inp.checked) {
-          fetchedData.forEach((item) => {
-            if (
-              item.brand == this.value &&
-              item.category == productCategoryTitle
-            ) {
-              filteredids.push(item.id);
-            }
-          });
-          localStorage.setItem("filterCategory", filteredids);
-          fetchedData.forEach((item) => {
-            if (filteredids.includes(item.id)) {
-              createProducts(item);
-            }
-          });
-        } else {
-          productsContainer.innerHTML = "";
-          fetchedData.forEach((item) => {
-            if (
-              item.brand == this.value &&
-              item.category == productCategoryTitle
-            ) {
-              let ind = filteredids.indexOf(item.id);
-              filteredids.splice(ind, 1);
-              localStorage.setItem("filterCategory", filteredids);
-            }
-          });
-          fetchedData.forEach((item) => {
-            if (filteredids.includes(item.id)) {
-              createProducts(item);
-            }
-          });
-        }
-        if (filteredids.length < 1) {
-          fetchedData.forEach((item) => {
-            if (item.category == productCategoryTitle) {
-              createProducts(item);
-            }
-          });
-        }
-      });
-    });
-}
-
 let brandNewArr = [];
 let colorNewArr = [];
 
@@ -288,8 +135,22 @@ fetch("../products.json")
       colorTitle.innerHTML = "";
     }
     var inps = document.querySelectorAll('input[type="checkbox"]');
+    let checkedArr = [];
+    let selectedArr = [];
+
     function filterProducts() {
       var selectedFilters = {};
+      if (this.checked) {
+        checkedArr.push(this.value);
+        queryParams.set("filteredProducts", checkedArr);
+        history.replaceState(null, null, "?" + queryParams.toString());
+      } else {
+        const ind = checkedArr.indexOf(this.value);
+        checkedArr.splice(ind, 1);
+        queryParams.set("filteredProducts", checkedArr);
+        history.replaceState(null, null, "?" + queryParams.toString());
+      }
+
       inps.forEach(function (checkbox) {
         if (checkbox.checked) {
           if (!selectedFilters.hasOwnProperty(checkbox.name)) {
@@ -298,6 +159,7 @@ fetch("../products.json")
           selectedFilters[checkbox.name].push(checkbox.value);
         }
       });
+
       var filteredResults = document.querySelectorAll(".products");
       for (var filterName in selectedFilters) {
         if (selectedFilters.hasOwnProperty(filterName)) {
@@ -327,13 +189,64 @@ fetch("../products.json")
       });
     }
 
+    let selectedData = queryParams.get("filteredProducts");
+    if (selectedData) {
+      selectedArr = selectedData.split(",");
+      inps.forEach((data) => {
+        if (selectedArr.includes(data.value)) {
+          data.checked = true;
+        }
+      });
+    }
+    let selectedFilters = {};
     inps.forEach(function (checkbox) {
       checkbox.addEventListener("change", filterProducts);
+    });
+
+    inps.forEach((item) => {
+      if (item.checked) {
+        if (item.checked) {
+          if (!selectedFilters.hasOwnProperty(item.name)) {
+            selectedFilters[item.name] = [];
+          }
+          selectedFilters[item.name].push(item.value);
+        }
+
+        var filteredResults = document.querySelectorAll(".products");
+        for (var filterName in selectedFilters) {
+          if (selectedFilters.hasOwnProperty(filterName)) {
+            var filterValues = selectedFilters[filterName];
+            filteredResults = Array.prototype.filter.call(
+              filteredResults,
+              function (element) {
+                var matched = false;
+                var currentFilterValues = element
+                  .getAttribute("data-category")
+                  .split(" ");
+                currentFilterValues.forEach(function (currentFilterValues) {
+                  if (filterValues.indexOf(currentFilterValues) !== -1) {
+                    matched = true;
+                  }
+                });
+                return matched;
+              }
+            );
+          }
+        }
+        document.querySelectorAll(".products").forEach(function (element) {
+          element.style.display = "none";
+        });
+        filteredResults.forEach(function (element) {
+          element.style.display = "block";
+        });
+      } else {
+        console.log("not working");
+      }
     });
   })
   .catch((err) => console.log(err));
 categoryTitle.innerHTML = productCategoryTitle;
-window.onload = function () {};
+
 function createFilter(data, dataName, appendingContainer) {
   for (let i = 0; i < data.length; i++) {
     let container = createElement("div");
