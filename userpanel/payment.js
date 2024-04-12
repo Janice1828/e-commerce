@@ -53,11 +53,14 @@ fetch("../products.json")
     let purchasedProducts = [];
     payBtn.addEventListener("click", () => {
       let makePayment = confirm("Are you Sure?");
-      for (let i = 0; i < payingProductNumber.length; i++) {
-        purchasedProducts.push(payingProductNumber[i]);
+      // console.log(makePayment);
+      if (makePayment == true) {
+        for (let i = 0; i < payingProductNumber.length; i++) {
+          purchasedProducts.push(payingProductNumber[i]);
+        }
+        localStorage.setItem("purchasedProducts", purchasedProducts);
+        removeProducts();
       }
-      localStorage.setItem("purchasedProducts", purchasedProducts);
-      removeProducts();
     });
 
     result.forEach((data) => {

@@ -72,58 +72,28 @@ setTimeout(() => {
     }
     let result = removeDuplicateCategory(categoryArr);
     result.forEach((item) => {
-      let opt = createElement("option");
+      let opt = createElement("a");
       opt.textContent = item;
       opt.value = item;
+      opt.className = "filterProduct";
+      opt.href = "./subCategory.html";
       category.append(opt);
+      opt.id = item;
     });
-    try {
-      let storageCategory = [];
-      let categoryName = "";
-      category.addEventListener("change", function () {
-        storageCategory = [];
-        cards_container.innerHTML = "";
+    let links = document.querySelectorAll(".filterProduct");
+    let storageCategory = [];
+    links.forEach((link) => {
+      link.addEventListener("click", function () {
         data.forEach((item) => {
-          if (this.value == "Accessories" && item.category == "Accessories") {
-            if ((item.category = "Accessories")) {
-              storageCategory.push(item.id);
-              categoryName = "Accessories";
-              localStorage.setItem("categoryTitle", categoryName);
-            }
-            window.location.href = "./subCategory.html";
-          } else if (this.value == "Fashion" && item.category == "Fashion") {
-            if ((item.category = "Fashion")) {
-              storageCategory.push(item.id);
-              categoryName = "Fashion";
-              localStorage.setItem("categoryTitle", categoryName);
-            }
-            window.location.href = "./subCategory.html";
-          } else if (
-            this.value == "Cosmetics" &&
-            item.category == "Cosmetics"
-          ) {
-            if ((item.category = "Cosmetics")) {
-              storageCategory.push(item.id);
-              categoryName = "Cosmetics";
-              localStorage.setItem("categoryTitle", categoryName);
-            }
-            window.location.href = "./subCategory.html";
-          } else if (this.value == "Sports" && item.category == "Sports") {
-            if ((item.category = "Sports")) {
-              storageCategory.push(item.id);
-              categoryName = "Sports";
-              localStorage.setItem("categoryTitle", categoryName);
-            }
-            window.location.href = "./subCategory.html";
-          } else if (this.value == "all") {
-            createProduct(item);
+          if (this.value == item.category) {
+            storageCategory.push(item.id);
           }
         });
+        localStorage.setItem("categoryTitle", this.id);
+
         localStorage.setItem("productCategories", storageCategory);
       });
-    } catch (err) {
-      console.error(err.message);
-    }
+    });
   }
   fetchData();
 }, 1000);

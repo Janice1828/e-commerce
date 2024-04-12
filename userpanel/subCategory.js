@@ -239,8 +239,6 @@ fetch("../products.json")
         filteredResults.forEach(function (element) {
           element.style.display = "block";
         });
-      } else {
-        console.log("not working");
       }
     });
   })
