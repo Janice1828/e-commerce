@@ -112,9 +112,6 @@ let purchasedProducts = localStorage.getItem("purchasedProducts");
 const purchasedProductsArr = purchasedProducts.split(",");
 let purchasedProductsNumber = purchasedProductsArr.map(convertingToNumber);
 
-if (loggedIn != "true") {
-  document.getElementById("product-rating-section").style.display = "none";
-}
 function logout() {
   sessionStorage.removeItem("loggedIn");
   window.location.href = "http://127.0.0.1:5500/login.html";
@@ -198,14 +195,11 @@ function rateIt() {
   }
   location.reload();
 }
-if (purchasedProductsNumber.includes(Number(product_id))) {
+if (
+  purchasedProductsNumber.includes(Number(product_id)) &&
+  loggedIn == "true"
+) {
   document.getElementById("product-rating-section").style.display = "block";
 } else {
   document.getElementById("product-rating-section").style.display = "none";
 }
-// document.addEventListener("DOMContentLoaded", function () {
-//   const url = new URLSearchParams(window.location.search);
-//   url.set("productId", product_id);
-//   history.replaceState(null, null, "?" + url.toString());
-// });
-// console.log(product_id);

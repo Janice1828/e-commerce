@@ -20,83 +20,82 @@ if (loggedIn != "true") {
 }
 let cards_container = document.getElementById("api_fetchedproducts_row");
 
-setTimeout(() => {
-  document.querySelector(".loader").style.display = "none";
-  async function fetchData() {
-    let totalQty = 0;
-    let fetchData = await fetch("../products.json");
-    let res = await fetchData.json();
-    let data = res.data;
-    data.forEach((item) => {
-      let productQty = sessionStorage.getItem(`product${item.id}`);
-      totalQty += Number(productQty);
-      let child = createElement("div");
-      child.className = "col-3 col-xl-4 col-md-6 col-sm-12";
-      let link = createElement("a");
-      link.className = "link_card";
-      link.href = `productDetail.html?productId=${item.id}`;
-      let card = createElement("div");
-      card.className = "card";
-      let card_body = createElement("div");
-      card_body.className = "card_body";
-      let img = document.createElement("div");
-      img.innerHTML = `<img src=${item.image} class="product_image" alt="Image"/>`;
-      img.id = "fetched_product_img";
-      let card_content = createElement("div");
-      card_content.className = "card_content";
-      let title = createElement("p");
-      title.id = "product_title";
-      card.title = item.title;
-      let price = createElement("p");
-      price.id = "price";
-      let discountedPrice = createElement("strike");
-      discountedPrice.id = "discountedPrice";
-      link.appendChild(card);
-      child.appendChild(link);
-      card.appendChild(card_body);
-      card_body.append(img, card_content);
-      card_content.appendChild(title);
-      card_content.append(price, discountedPrice);
-      title.textContent = item.title;
-      discountedPrice.textContent = "Nrs." + item.price;
-      price.textContent = "Nrs. " + item.discountedPrice;
-      cards_container.appendChild(child);
-    });
-    orderedNumber.innerHTML = totalQty;
-    function getCategory(obj) {
-      return obj.category;
-    }
-    let categoryArr = data.map(getCategory);
-    function removeDuplicateCategory(arr) {
-      return [...new Set(arr)];
-    }
-    let result = removeDuplicateCategory(categoryArr);
-    result.forEach((item) => {
-      let opt = createElement("a");
-      opt.textContent = item;
-      opt.value = item;
-      opt.className = "filterProduct";
-      opt.href = "./subCategory.html";
-      category.append(opt);
-      opt.id = item;
-    });
-    let links = document.querySelectorAll(".filterProduct");
-    let storageCategory = [];
-    links.forEach((link) => {
-      link.addEventListener("click", function () {
-        data.forEach((item) => {
-          if (this.value == item.category) {
-            storageCategory.push(item.id);
-          }
-        });
-        localStorage.setItem("categoryTitle", this.id);
-
-        localStorage.setItem("productCategories", storageCategory);
-      });
-    });
+// setTimeout(() => {
+async function fetchData() {
+  let totalQty = 0;
+  let fetchData = await fetch("../products.json");
+  let res = await fetchData.json();
+  let data = res.data;
+  data.forEach((item) => {
+    let productQty = sessionStorage.getItem(`product${item.id}`);
+    totalQty += Number(productQty);
+    let child = createElement("div");
+    child.className = "col-3 col-xl-4 col-md-6 col-sm-12";
+    let link = createElement("a");
+    link.className = "link_card";
+    link.href = `productDetail.html?productId=${item.id}`;
+    let card = createElement("div");
+    card.className = "card";
+    let card_body = createElement("div");
+    card_body.className = "card_body";
+    let img = document.createElement("div");
+    img.innerHTML = `<img src=${item.image} class="product_image" alt="Image"/>`;
+    img.id = "fetched_product_img";
+    let card_content = createElement("div");
+    card_content.className = "card_content";
+    let title = createElement("p");
+    title.id = "product_title";
+    card.title = item.title;
+    let price = createElement("p");
+    price.id = "price";
+    let discountedPrice = createElement("strike");
+    discountedPrice.id = "discountedPrice";
+    link.appendChild(card);
+    child.appendChild(link);
+    card.appendChild(card_body);
+    card_body.append(img, card_content);
+    card_content.appendChild(title);
+    card_content.append(price, discountedPrice);
+    title.textContent = item.title;
+    discountedPrice.textContent = "Nrs." + item.price;
+    price.textContent = "Nrs. " + item.discountedPrice;
+    cards_container.appendChild(child);
+  });
+  orderedNumber.innerHTML = totalQty;
+  function getCategory(obj) {
+    return obj.category;
   }
-  fetchData();
-}, 1000);
+  let categoryArr = data.map(getCategory);
+  function removeDuplicateCategory(arr) {
+    return [...new Set(arr)];
+  }
+  let result = removeDuplicateCategory(categoryArr);
+  result.forEach((item) => {
+    let opt = createElement("a");
+    opt.textContent = item;
+    opt.value = item;
+    opt.className = "filterProduct";
+    opt.href = "./subCategory.html";
+    category.append(opt);
+    opt.id = item;
+  });
+  let links = document.querySelectorAll(".filterProduct");
+  let storageCategory = [];
+  links.forEach((link) => {
+    link.addEventListener("click", function () {
+      data.forEach((item) => {
+        if (this.value == item.category) {
+          storageCategory.push(item.id);
+        }
+      });
+      localStorage.setItem("categoryTitle", this.id);
+
+      localStorage.setItem("productCategories", storageCategory);
+    });
+  });
+  document.querySelector(".loader").style.display = "none";
+}
+fetchData();
 
 function createElement(elementName) {
   return document.createElement(elementName);
