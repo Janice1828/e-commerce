@@ -21,11 +21,49 @@ if (loggedIn != "true") {
 let cards_container = document.getElementById("api_fetchedproducts_row");
 
 // setTimeout(() => {
+let trendingProduct = document.getElementById("trendingProduct");
 async function fetchData() {
   let totalQty = 0;
   let fetchData = await fetch("../products.json");
   let res = await fetchData.json();
   let data = res.data;
+  data.forEach((item) => {
+    let rating = sessionStorage.getItem(`ratingProduct${item.id}`);
+    if (rating >= 4) {
+      let child = createElement("div");
+      child.className = "col-4 col-xl-4 col-md-6 col-sm-12";
+      let link = createElement("a");
+      link.className = "link_card";
+      link.href = `productDetail.html?productId=${item.id}`;
+      let card = createElement("div");
+      card.className = "card";
+      let card_body = createElement("div");
+      card_body.className = "card_body";
+      let img = document.createElement("div");
+      img.innerHTML = `<img src=${item.image} class="product_image" alt="Image"/>`;
+      img.id = "fetched_product_img";
+      let card_content = createElement("div");
+      card_content.className = "card_content";
+      let title = createElement("p");
+      title.id = "product_title";
+      card.title = item.title;
+      let price = createElement("p");
+      price.id = "price";
+      let discountedPrice = createElement("strike");
+      discountedPrice.id = "discountedPrice";
+      link.appendChild(card);
+      child.appendChild(link);
+      card.appendChild(card_body);
+      card_body.append(img, card_content);
+      card_content.appendChild(title);
+      card_content.append(price, discountedPrice);
+      title.textContent = item.title;
+      discountedPrice.textContent = "Nrs." + item.price;
+      price.textContent = "Nrs. " + item.discountedPrice;
+      trendingProduct.appendChild(child);
+    }
+    document.getElementById("trendingLoader").style.display = "none";
+  });
   data.forEach((item) => {
     let productQty = sessionStorage.getItem(`product${item.id}`);
     totalQty += Number(productQty);
@@ -93,7 +131,7 @@ async function fetchData() {
       localStorage.setItem("productCategories", storageCategory);
     });
   });
-  document.querySelector(".loader").style.display = "none";
+  document.getElementById("listLoader").style.display = "none";
 }
 fetchData();
 
@@ -127,7 +165,6 @@ function createProduct(item) {
   discountedPrice.id = "discountedPrice";
   link.appendChild(card);
   child.appendChild(link);
-
   card.appendChild(card_body);
   card_body.appendChild(img);
   card_body.appendChild(card_content);

@@ -50,17 +50,23 @@ fetch("../products.json")
         location.reload();
       }
     }
-    let purchasedProducts = [];
+
+    let purchasedProductsstr = localStorage.getItem("purchasedProducts");
+    let purchasedProductArr = purchasedProductsstr.split(",");
+    let purchasedProducts = purchasedProductArr.map(function (num) {
+      return Number(num);
+    });
+    console.log(purchasedProducts);
+
     payBtn.addEventListener("click", () => {
       let makePayment = confirm("Are you Sure?");
-      // console.log(makePayment);
-      if (makePayment == true) {
-        for (let i = 0; i < payingProductNumber.length; i++) {
-          purchasedProducts.push(payingProductNumber[i]);
-        }
-        localStorage.setItem("purchasedProducts", purchasedProducts);
-        removeProducts();
+      // if (makePayment == true) {
+      for (let i = 0; i < payingProductNumber.length; i++) {
+        purchasedProducts.push(payingProductNumber[i]);
       }
+      localStorage.setItem("purchasedProducts", purchasedProducts);
+      removeProducts();
+      // }
     });
 
     result.forEach((data) => {

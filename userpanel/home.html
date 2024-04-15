@@ -19,12 +19,6 @@
           <a href="home.html"
             ><img src="../images/logo.jpg" alt="Logo" id="logo" title="Logo" />
           </a>
-          <input
-            id="search_products"
-            type="text"
-            placeholder="Search Products"
-            title="Search Products"
-          />
 
           <div class="d_flex navbar_contents">
             <a href="addedproducts.html" class="cart" title="Cart"
@@ -79,7 +73,6 @@
           <a class="prev" onclick="plusSlides(-1)">&laquo;</a>
           <a class="next" onclick="plusSlides(1)">&raquo;</a>
         </div>
-        <!-- <img src="../images/banner.jpg" alt="" id="banner" /> -->
       </div>
       <div class="products_section">
         <div class="row" id="productsContainer">
@@ -88,11 +81,27 @@
               <div id="change_category"></div>
             </div>
           </div>
-          <div class="col-10 col-lg-9 col-sm-7 col-xsm-12">
-            <h2 class="" id="justForYou">Just For You</h2>
-            <div class="row" id="api_fetchedproducts_row"></div>
+          <div class="col-10 row col-lg-9 col-sm-7 col-xsm-12">
             <div class="col-12">
-              <div class="loader"></div>
+              <h2 class="" id="popularProductsHeading">Popular Products</h2>
+              <div id="trendingProduct" class="row"></div>
+              <div class="loader" id="trendingLoader"></div>
+            </div>
+            <div class="col-12">
+              <div class="product-search">
+                <h2 class="" id="justForYou">Just For You</h2>
+                <input
+                  id="search_products"
+                  type="text"
+                  placeholder="Search Products"
+                  title="Search Products"
+                />
+              </div>
+
+              <div class="row" id="api_fetchedproducts_row"></div>
+              <div class="col-12">
+                <div class="loader" id="listLoader"></div>
+              </div>
             </div>
           </div>
         </div>
