@@ -29,7 +29,7 @@ function Register() {
       if (password_regex.test(register_password.value)) {
         localStorage.setItem("email", email.value);
         localStorage.setItem("password", register_password.value);
-        alert("User Registered successfully!");
+        sessionStorage.setItem("newRegister", "true");
         event.preventDefault();
         localStorage.removeItem("added_product_id");
         localStorage.setItem("purchasedProducts", 0);

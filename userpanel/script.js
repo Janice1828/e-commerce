@@ -8,7 +8,7 @@ function selectById(idName) {
 }
 function logout() {
   sessionStorage.removeItem("loggedIn");
-  window.location.href = "login.html";
+  window.location.href = "../login.html";
 }
 let loggedIn = sessionStorage.getItem("loggedIn");
 if (loggedIn == "true") {
@@ -28,6 +28,7 @@ async function fetchData() {
   let res = await fetchData.json();
   let data = res.data;
   data.forEach((item) => {
+    sessionStorage.setItem(`ratingProduct${item.id}`, item.rating);
     let rating = sessionStorage.getItem(`ratingProduct${item.id}`);
     if (rating >= 4) {
       let child = createElement("div");

@@ -1019,3 +1019,22 @@ h4,
 #trendingProduct {
   justify-content: center;
 }
+.card-message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgb(59, 145, 59);
+}
+.fa-xmark {
+  padding: 7px 10px;
+  font-size: 18px;
+}
+#removeNotification {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+.text-white {
+  color: #fff;
+}

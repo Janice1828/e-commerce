@@ -19,8 +19,19 @@ function login_submit() {
   if (inp_email == get_email && inp_password == get_password) {
     sessionStorage.setItem("loggedIn", "true");
     event.preventDefault();
+    sessionStorage.setItem("newRegister", "false");
     window.location.href = "./userpanel/home.html";
   } else {
     document.getElementById("loginErr").style.display = "block";
   }
+}
+const newRegister = sessionStorage.getItem("newRegister");
+
+// console.log(newRegister);
+if (newRegister != "true") {
+  document.querySelector(".w-half").style.display = "none";
+}
+function removeNewRegister() {
+  sessionStorage.setItem("newRegister", "false");
+  document.querySelector(".w-half").style.display = "none";
 }
