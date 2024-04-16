@@ -1055,3 +1055,7 @@ h4,
 .pagination-container {
   padding-top: 40px;
 }
+.filterProduct {
+  text-decoration: none;
+  padding-bottom: 7px;
+}

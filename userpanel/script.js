@@ -153,7 +153,7 @@ async function fetchData() {
   let result = removeDuplicateCategory(categoryArr);
   result.forEach((item) => {
     let opt = createElement("a");
-    opt.textContent = item;
+    opt.textContent = `${item} ->`;
     opt.value = item;
     opt.className = "filterProduct";
     opt.href = "./subCategory.html";
