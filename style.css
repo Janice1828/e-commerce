@@ -1038,3 +1038,20 @@ h4,
 .text-white {
   color: #fff;
 }
+.product-item {
+  display: none;
+}
+#pagination {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+#pagination a {
+  border: 1px solid var(--yellow);
+  padding: 7px 10px;
+  text-decoration: none;
+}
+#pagination .active {
+  background-color: var(--yellow);
+  color: #fff;
+}

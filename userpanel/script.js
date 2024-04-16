@@ -32,7 +32,7 @@ async function fetchData() {
     let rating = sessionStorage.getItem(`ratingProduct${item.id}`);
     if (rating >= 4) {
       let child = createElement("div");
-      child.className = "col-4 col-xl-4 col-md-6 col-sm-12";
+      child.className = "col-2 col-xl-4 col-md-6 col-sm-12";
       let link = createElement("a");
       link.className = "link_card";
       link.href = `productDetail.html?productId=${item.id}`;
@@ -69,7 +69,7 @@ async function fetchData() {
     let productQty = sessionStorage.getItem(`product${item.id}`);
     totalQty += Number(productQty);
     let child = createElement("div");
-    child.className = "col-3 col-xl-4 col-md-6 col-sm-12";
+    child.className = "col-3 col-xl-4 col-md-6 col-sm-12 product-item";
     let link = createElement("a");
     link.className = "link_card";
     link.href = `productDetail.html?productId=${item.id}`;
@@ -100,6 +100,48 @@ async function fetchData() {
     price.textContent = "Nrs. " + item.discountedPrice;
     cards_container.appendChild(child);
   });
+  function paginate(items, itemsPerPage) {
+    let currentPage = 1;
+    const totalPages = Math.ceil(items.length / itemsPerPage);
+    function showItems(page) {
+      items.forEach((a) => {
+        a.style.display = "none";
+      });
+      let startIndex = (page - 1) * itemsPerPage; //2-1=1*5
+      let endIndex = startIndex + itemsPerPage; //5+5=10
+      for (let i = startIndex; i < endIndex; i++) {
+        if (items[i]) {
+          items[i].style.display = "block";
+        }
+      }
+    }
+    showItems(currentPage);
+    setUpPagination();
+    function setUpPagination() {
+      const pagination = document.querySelector("#pagination");
+      pagination.innerHTML = "";
+      for (let i = 1; i <= totalPages; i++) {
+        const link = document.createElement("a");
+        link.href = "#";
+        link.innerHTML = i;
+        link.value = i;
+        if (i == currentPage) {
+          link.classList.add("active");
+        }
+        link.addEventListener("click", () => {
+          event.preventDefault();
+          currentPage = i;
+          showItems(currentPage);
+          const currentActive = pagination.querySelector(".active");
+          currentActive.classList.remove("active");
+          link.classList.add("active");
+        });
+        pagination.appendChild(link);
+      }
+    }
+  }
+  let items = document.querySelectorAll(".product-item");
+  paginate(items, 6);
   orderedNumber.innerHTML = totalQty;
   function getCategory(obj) {
     return obj.category;
@@ -141,7 +183,7 @@ function createElement(elementName) {
 }
 function createProduct(item) {
   let child = createElement("div");
-  child.className = "col-3 col-xl-4 col-md-6 col-sm-12";
+  child.className = "col-3 col-xl-4 col-md-6 col-sm-12 product-item";
   let link = createElement("a");
   link.addEventListener("click", () => {
     localStorage.setItem("product_id", item.id);
@@ -185,27 +227,53 @@ if (!loggedIn == null) {
     document.querySelector(".order-adding-section").style.display = "none";
   }
 }
-searchProducts.addEventListener("input", findProduct);
-function findProduct(e) {
-  fetch("../products.json")
-    .then((res) => res.json())
-    .then((data) => {
-      let result = data.data;
-      let filteredData = result.filter(filterValue);
-      cards_container.innerHTML = "";
-      filteredData.forEach((item) => {
-        createProduct(item);
-      });
-      function filterValue(value) {
-        let inpValue = e.target.value.toUpperCase();
-        let title = value.title.toUpperCase();
-        if (title.includes(inpValue)) {
-          return value;
+
+fetch("../products.json")
+  .then((res) => res.json())
+  .then((data) => {
+    let result = data.data;
+    searchProducts.addEventListener("input", findProduct);
+    let items = document.querySelectorAll(".product-item");
+    function findProduct(e) {
+      if (searchProducts.value == "") {
+        let active = document.querySelector(".active");
+        items.forEach((a) => {
+          a.style.display = "none";
+        });
+        function paginate(items, itemsPerPage) {
+          let currentPage = active.value;
+          function showItems(page) {
+            let startIndex = (page - 1) * itemsPerPage;
+            let endIndex = startIndex + itemsPerPage;
+            for (let i = startIndex; i < endIndex; i++) {
+              if (items[i]) {
+                items[i].style.display = "block";
+              }
+            }
+          }
+          showItems(currentPage);
+        }
+        paginate(items, 6);
+      } else {
+        items.forEach((a) => {
+          a.style.display = "none";
+        });
+        let filteredData = result.filter(filterValue);
+        for (let i = 0; i < filteredData.length; i++) {
+          items[filteredData[i].id - 1].style.display = "block";
+        }
+        function filterValue(value) {
+          let inpValue = e.target.value.toUpperCase();
+          let title = value.title.toUpperCase();
+          if (title.includes(inpValue)) {
+            return value;
+          }
         }
       }
-    })
-    .catch((err) => console.log(err));
-}
+    }
+  })
+  .catch((err) => console.log(err));
+
 let slideIndex = 1;
 showSlides(slideIndex);
 function plusSlides(n) {
