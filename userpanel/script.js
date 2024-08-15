@@ -35,7 +35,7 @@ async function fetchData() {
       child.className = "col-2 col-xl-4 col-md-6 col-sm-12";
       let link = createElement("a");
       link.className = "link_card";
-      link.href = `productDetail.html?productId=${item.id}`;
+      link.href = `./userpanel/productDetail.html?productId=${item.id}`;
       let card = createElement("div");
       card.className = "card";
       let card_body = createElement("div");
@@ -72,7 +72,7 @@ async function fetchData() {
     child.className = "col-3 col-xl-4 col-md-6 col-sm-12 product-item";
     let link = createElement("a");
     link.className = "link_card";
-    link.href = `productDetail.html?productId=${item.id}`;
+    link.href = `./userpanel/productDetail.html?productId=${item.id}`;
     let card = createElement("div");
     card.className = "card";
     let card_body = createElement("div");
@@ -156,7 +156,7 @@ async function fetchData() {
     opt.textContent = `${item} ->`;
     opt.value = item;
     opt.className = "filterProduct";
-    opt.href = "./subCategory.html";
+    opt.href = "./userpanel/subCategory.html";
     category.append(opt);
     opt.id = item;
   });

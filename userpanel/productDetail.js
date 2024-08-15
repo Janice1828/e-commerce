@@ -12,11 +12,15 @@ function convertingToNumber(n) {
 }
 var num = 1;
 let loggedIn = sessionStorage.getItem("loggedIn");
+if (!loggedIn) {
+  document.querySelector(".cart").style.display = "none";
+  document.getElementById("logout").style.display = "none";
+  document.getElementById("product-rating-section").style.display = "none";
+}
 let orderedNumber = document.querySelector(".cart-order-number");
 let totalAddToCart = localStorage.getItem("added_product_id");
 if (totalAddToCart) {
   let cartNumberConverting = totalAddToCart.split(",");
-
   const cartArr = cartNumberConverting.map(convertingToNumber);
 } else {
   orderedNumber.innerHTML = 0;

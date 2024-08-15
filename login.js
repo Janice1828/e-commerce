@@ -20,7 +20,7 @@ function login_submit() {
     sessionStorage.setItem("loggedIn", "true");
     event.preventDefault();
     sessionStorage.setItem("newRegister", "false");
-    window.location.href = "./userpanel/index.html";
+    window.location.href = "./index.html";
   } else {
     document.getElementById("loginErr").style.display = "block";
   }
