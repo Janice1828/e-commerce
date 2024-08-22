@@ -14,7 +14,6 @@ function ab() {
       response.forEach((item) => {
         let getQty = sessionStorage.getItem(`product${item.id}`);
         getNum += Number(getQty);
-
         let fetchQty = sessionStorage.getItem(`product${item.id}`);
         if (fetchQty >= 1) {
           let tr = createElement("tr");
@@ -115,7 +114,7 @@ let id = localStorage.getItem("added_product_id");
 let loggedIn = sessionStorage.getItem("loggedIn");
 function logout() {
   sessionStorage.removeItem("loggedIn");
-  window.location.href = "http://127.0.0.1:5500/login.html";
+  window.location.href = "../login.html";
 }
 if (loggedIn == "true") {
   document.querySelector(".nav_login_register").style.display = "none";
@@ -137,5 +136,5 @@ if (totalAddToCart) {
 }
 function logout() {
   sessionStorage.removeItem("loggedIn");
-  window.location.href = "http://127.0.0.1:5500/login.html";
+  window.location.href = "../login.html";
 }

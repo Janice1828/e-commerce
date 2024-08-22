@@ -118,7 +118,7 @@ let purchasedProductsNumber = purchasedProductsArr.map(convertingToNumber);
 
 function logout() {
   sessionStorage.removeItem("loggedIn");
-  window.location.href = "http://127.0.0.1:5500/login.html";
+  window.location.href = "../login.html";
 }
 if (loggedIn == "true") {
   document.querySelector(".nav_login_register").style.display = "none";
