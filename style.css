@@ -58,7 +58,7 @@
 }
 .col-5 {
   flex: 0 0 auto;
-  width: 41.66666667%;  
+  width: 41.66666667%;
 }
 .col-6 {
   flex: 0 0 auto;
@@ -116,6 +116,8 @@
 #logo {
   height: 60px;
   width: 60px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 .cart {
   position: relative;
